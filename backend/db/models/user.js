@@ -32,14 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async signup({ username, email, password }) {
+    static async signup({ username, email, password, firstName, lastName }) { // user.signup, need to add firstname and lastname
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
         email,
-        hashedPassword
+        hashedPassword,
+        firstName,
+        lastName
       });
-      return await User.scope('currentUser').findByPk(user.id);
+      return await User.scope('currentUser').findByPk(user.id); //current user scope is used so we dont pass back hashed pw
     }
 
     static associate(models) {
@@ -75,6 +77,14 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [60, 60]
         }
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false
       }
     },
     {

@@ -1,4 +1,4 @@
-// backend/routes/api/index.js
+// backend/routes/api/index.js // hub for all the routers we build
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');

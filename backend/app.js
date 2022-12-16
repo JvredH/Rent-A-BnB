@@ -3,7 +3,7 @@ require('express-async-errors');
 const morgan = require('morgan');
 const cors = require('cors');
 const csurf = require('csurf');
-const helmet = require('helmet');
+const helmet = require('helmet'); // light security blanket, global middle ware.
 const cookieParser = require('cookie-parser');
 
 const { environment } = require('./config');
@@ -51,6 +51,7 @@ const routes = require('./routes');
 
 app.use(routes); // Connect all the routes
 
+// everything below is an error handler
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
@@ -70,7 +71,7 @@ app.use((err, _req, _res, next) => {
   next(err);
 });
 
-// Error formatter
+// Error formatter // takes in any error that hasnt been handled
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
   console.error(err);
