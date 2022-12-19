@@ -12,6 +12,9 @@ const isProduction = environment === 'production';
 // backend/app.js
 const routes = require('./routes');
 
+// backend/app.js
+const routes = require('./routes');
+
 const { ValidationError } = require('sequelize');
 
 const app = express();
@@ -49,6 +52,8 @@ app.use(
 );
 
 
+// backend/app.js
+const routes = require('./routes');
 
 app.use(routes); // Connect all the routes
 
