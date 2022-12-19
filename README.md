@@ -5,7 +5,7 @@
 
 ![airbnb-dbdiagram]
 
-[airbnb-dbdiagram]: ../assets/airbnb_dbdiagram.png
+[airbnb-dbdiagram]: ./backend/assets/airbnb_dbdiagram.png
 
 ## API Documentation
 
@@ -72,9 +72,9 @@ Returns the information about the current user that is logged in.
         "lastName": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith"
-      } 
+      }
     }
-    
+
     ```
 
 ### Log In a User
@@ -111,7 +111,7 @@ information.
         "lastName": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith"
-      } 
+      }
     }
     ```
 
