@@ -23,17 +23,17 @@ module.exports = {
     {
       spotId: 1,
       url: 'images.png',
-      boolean: true
+      preview: true
     },
     {
       spotId: 2,
       url: 'images.png',
-      boolean: false
+      preview: false
     },
     {
       spotId: 3,
       url: 'images.png',
-      boolean: true
+      preview: true
     },
    ])
   },
