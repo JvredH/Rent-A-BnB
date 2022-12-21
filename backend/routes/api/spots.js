@@ -47,8 +47,40 @@ const validateSpot = [
 ];
 
 
-router.post(':spotId/images', async (req, res, next) => {
-  
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+  const { url, preview } = req.body;
+  const { spotId } = req.params
+  const user = req.user;
+
+  // check if user is owner of spot
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    res.status(404);
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: res.statusCode
+    })
+  } else {
+      if (spot.ownerId == user.id) {
+        const newImage = await SpotImage.create({
+          spotId: spotId,
+          url,
+          preview
+        })
+        return res.json({
+          id: newImage.id,
+          url,
+          preview
+        })
+      } else {
+        res.status(400)
+        return res.json({
+          message: 'Spot must belong to user to add image',
+          statusCode: res.statusCode
+        })
+      }
+  }
 })
 
 router.get('/current', requireAuth, async (req, res, next) => {
