@@ -14,12 +14,8 @@ router.get('/', async (req, res, next) => {
     include: [
       {
         model: Review,
-        attributes: [
-          // 'spotId',
-          'stars',
-          // [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
-        ],
-        // group: 'spotId'
+        attributes: ['stars'],
+
       },
       {
         model: SpotImage,
@@ -58,34 +54,6 @@ router.get('/', async (req, res, next) => {
     })
     delete spot.Reviews
   })
-
-  // const ratings = await Review.findAll({
-  //   group: 'spotId',
-  //   attributes:[
-  //     'spotId',
-  //     [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
-  //   ]
-  // })
-
-  // ratingsJson = []
-
-  // ratings.forEach(rating => {
-  //   ratingsJson.push(rating.toJSON())
-  // })
-
-  // for (let i = 0; i < allSpotsArray.length; i++) {
-  //   let spot = allSpotsArray[i];
-  //   // console.log(spot)
-  //   for (let j = 0; j < ratingsJson.length; j++) {
-  //     let ratingObj = ratingsJson[j];
-  //     // console.log(ratingObj)
-  //     if (spot.id === ratingObj.spotId) {
-  //       spot.avgRating = ratingObj.avgRating;
-  //       delete spot.Reviews
-  //     }
-  //   }
-  // }
-
 
   res.json({Spots: allSpotsArray})
 })
