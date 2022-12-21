@@ -48,32 +48,43 @@ router.get('/', async (req, res, next) => {
     delete spot.SpotImages
   })
 
-  const ratings = await Review.findAll({
-    group: 'spotId',
-    attributes:[
-      'spotId',
-      [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
-    ]
+  allSpotsArray.forEach(spot => { // iterate through each spot object
+    let reviewsArr = spot.Reviews;
+    let arrLength = reviewsArr.length;
+    let sum = 0;
+    reviewsArr.forEach(star => {
+      sum += star.stars
+      spot.avgRating = sum / arrLength
+    })
+    delete spot.Reviews
   })
 
-  ratingsJson = []
+  // const ratings = await Review.findAll({
+  //   group: 'spotId',
+  //   attributes:[
+  //     'spotId',
+  //     [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
+  //   ]
+  // })
 
-  ratings.forEach(rating => {
-    ratingsJson.push(rating.toJSON())
-  })
+  // ratingsJson = []
 
-  for (let i = 0; i < allSpotsArray.length; i++) {
-    let spot = allSpotsArray[i];
-    // console.log(spot)
-    for (let j = 0; j < ratingsJson.length; j++) {
-      let ratingObj = ratingsJson[j];
-      // console.log(ratingObj)
-      if (spot.id === ratingObj.spotId) {
-        spot.avgRating = ratingObj.avgRating;
-        delete spot.Reviews
-      }
-    }
-  }
+  // ratings.forEach(rating => {
+  //   ratingsJson.push(rating.toJSON())
+  // })
+
+  // for (let i = 0; i < allSpotsArray.length; i++) {
+  //   let spot = allSpotsArray[i];
+  //   // console.log(spot)
+  //   for (let j = 0; j < ratingsJson.length; j++) {
+  //     let ratingObj = ratingsJson[j];
+  //     // console.log(ratingObj)
+  //     if (spot.id === ratingObj.spotId) {
+  //       spot.avgRating = ratingObj.avgRating;
+  //       delete spot.Reviews
+  //     }
+  //   }
+  // }
 
 
   res.json({Spots: allSpotsArray})
