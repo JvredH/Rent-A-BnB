@@ -228,7 +228,7 @@ router.put('/:spotId', requireAuth, validateSpot, async ( req, res, next ) => {
   }
 
   if (address) spot.set( {address} );
-  if (city) spot.set( {state} );
+  if (city) spot.set( {city} );
   if (state) spot.set( {state} );
   if (country) spot.set( {country} );
   if (lat) spot.set( {lat} );
