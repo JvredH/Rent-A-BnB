@@ -204,6 +204,73 @@ router.get('/:spotId', async ( req, res, next ) => {
   res.json(spotJson)
 })
 
+router.put('/:spotId', requireAuth, validateSpot, async ( req, res, next ) => {
+  const { spotId } = req.params;
+  const { ownerId, address, city, state, country, lat, lng, name, description, price } = req.body
+  const user = req.user
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    res.status(404);
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (user.id !== spot.ownerId) {
+    res.status(404);
+    return res.json({
+      message: 'Only owner can edit this spot',
+      statusCode: res.statusCode
+    })
+  }
+
+  if (address) spot.set( {address} );
+  if (city) spot.set( {state} );
+  if (state) spot.set( {state} );
+  if (country) spot.set( {country} );
+  if (lat) spot.set( {lat} );
+  if (lng) spot.set( {lng} );
+  if (name) spot.set( {name} );
+  if (description) spot.set( {description} );
+  if (price) spot.set( {price} )
+
+  await spot.save()
+
+  return res.json(spot)
+})
+
+router.delete('/:spotId', requireAuth, async ( req, res, next ) => {
+  const { spotId } = req.params;
+  const user = req.user;
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    res.status(404);
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (user.id !== spot.ownerId) {
+    res.status(404);
+    return res.json({
+      message: "Only owners can delete this spot",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (spot) {
+    await spot.destroy()
+    res.status(200)
+    return res.json( {message: 'Successfully deleted', statusCode: res.statusCode} )
+  }
+})
+
 router.post('/', requireAuth, validateSpot, async( req, res ) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body
   const  user  = req.user
