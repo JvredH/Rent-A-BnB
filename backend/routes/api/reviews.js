@@ -5,6 +5,58 @@ const { Review, ReviewImage, User, sequelize, Spot, SpotImage } = require('../..
 
 const router = express.Router();
 
+// add an image to a review based on the reviews id
+router.post('/:reviewId/images', requireAuth, async ( req, res, ) => {
+  const user = req.user;
+  const { reviewId } = req.params
+  const { url } = req.body
+
+  const review = await Review.findByPk(reviewId);
+
+  if (!review) {
+    res.status(404);
+    return res.json({
+      message: "Review couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (user.id !== review.userId) {
+    res.status(401);
+    return res.json({
+      message: 'Only user that created review can add images',
+      statusCode: res.status
+    })
+  }
+
+  const reviewImages = await ReviewImage.findAll({
+    where: {
+      reviewId: reviewId
+    }
+  })
+
+  if (reviewImages.length > 10) {
+    res.status(403);
+    return res.json({
+      message: 'Maximum number of images for this resource was reached',
+      statusCode: res.statusCode
+    })
+  }
+
+  const newReview = await ReviewImage.create({
+    url,
+    reviewId
+  })
+
+  const response = {
+    id: newReview.id,
+    url: newReview.url,
+
+  }
+
+  res.json(response)
+})
+
 router.get('/current', requireAuth, async ( req, res, next ) => {
   const user = req.user;
 
