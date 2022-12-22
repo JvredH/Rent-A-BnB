@@ -1,12 +1,13 @@
 const express = require('express');
 
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { Spot, Review, User, SpotImage, sequelize, ReviewImage } = require('../../db/models');
 
 const { check } = require('express-validator');
-const { handleValidationErrors, validationSpots } = require('../../utils/validation');
+const { handleValidationErrors, validationSpots, validationReviews } = require('../../utils/validation');
 
+const { Op } = require('sequelize')
 
 const router = express.Router();
 
@@ -43,7 +44,18 @@ const validateSpot = [
   check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required'),
-    validationSpots
+  validationSpots
+];
+
+const validateReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .isInt({min: 1, max: 5})
+    .withMessage('Stars must be an integer from 1 to 5'),
+  validationReviews
 ];
 
 // get all reviews by spot id
@@ -84,6 +96,60 @@ router.get('/:spotId/reviews', async ( req, res, next ) => {
 
   return res.json({Reviews: reviewsJson})
 })
+
+// create a review for a spot based on the spot's id
+router.post('/:spotId/reviews', requireAuth, validateReview, async ( req, res, next ) => {
+  const { spotId } = req.params;
+  const user = req.user;
+  const { review, stars } = req.body
+
+  const spot = await Spot.findByPk(spotId);
+  const userReviews = await Review.findAll({
+    where: {
+      [Op.and]: {
+        userId: user.id,
+        spotId: spotId
+      }
+    }
+  })
+
+
+  if(!spot) {
+    res.status(404);
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (userReviews.length) {
+    res.status(403);
+    return res.json({
+      message: 'User already has a review for this spot',
+      statusCode: res.statusCode
+    })
+  }
+
+  if(user.id == spot.ownerId) {
+    res.status(403);
+    return res.json({
+      message: 'Owner cannot write a review for their own spot',
+      statusCode: res.statusCode
+    })
+  }
+
+  const newReview = await Review.create({
+    userId: user.id,
+    spotId,
+    review,
+    stars
+  })
+
+
+  res.status(201)
+  return res.json(newReview)
+})
+
 
 router.post('/:spotId/images', requireAuth, async ( req, res, next ) => {
   const { url, preview } = req.body;
