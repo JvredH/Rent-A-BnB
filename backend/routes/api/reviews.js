@@ -16,7 +16,8 @@ router.get('/current', requireAuth, async ( req, res, next ) => {
     },
     include: [
       {
-        model: User
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
       },
       {
         model: Spot,
@@ -25,7 +26,7 @@ router.get('/current', requireAuth, async ( req, res, next ) => {
       },
       {
         model: ReviewImage,
-        attributes: {exclude: ['createdAt', 'updatedAt', 'reviewId']}
+        attributes: ['id', 'url']
       },
     ]
   })
