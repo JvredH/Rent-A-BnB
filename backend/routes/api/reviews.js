@@ -3,7 +3,22 @@ const express = require('express');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Review, ReviewImage, User, sequelize, Spot, SpotImage } = require('../../db/models');
 
+const { check } = require('express-validator');
+const { validationReviews } = require('../../utils/validation');
+
 const router = express.Router();
+
+const validateReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .isInt({min: 1, max: 5})
+    .withMessage('Stars must be an integer from 1 to 5'),
+  validationReviews
+];
+
 
 // add an image to a review based on the reviews id
 router.post('/:reviewId/images', requireAuth, async ( req, res, ) => {
@@ -60,8 +75,6 @@ router.post('/:reviewId/images', requireAuth, async ( req, res, ) => {
 router.get('/current', requireAuth, async ( req, res, next ) => {
   const user = req.user;
 
-  // console.log(user.id)
-
   const reviews = await Review.findAll({
     where: {
       userId: user.id
@@ -104,8 +117,39 @@ router.get('/current', requireAuth, async ( req, res, next ) => {
     delete spot.SpotImages;
   }
 
-
   return res.json({ Reviews: reviewsArr })
+})
+
+// Edit a review
+router.put('/:reviewId', requireAuth, validateReview, async ( req, res, next ) => {
+  const { reviewId } = req.params;
+  const { review, stars } = req.body;
+  const user = req.user;
+
+  const reviewToUpdate = await Review.findByPk(reviewId);
+
+  if (!reviewToUpdate) {
+    res.status(404);
+    return res.json({
+      message: "Review couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (reviewToUpdate.userId !== user.id) {
+    res.status(401);
+    return res.json({
+      message: 'Only the person that created this review can edit it',
+      statusCode: res.statusCode
+    })
+  }
+
+  if(review) reviewToUpdate.set( {review} )
+  if(stars) reviewToUpdate.set( {stars} )
+
+  await reviewToUpdate.save()
+
+  return res.json(reviewToUpdate)
 })
 
 module.exports = router;
