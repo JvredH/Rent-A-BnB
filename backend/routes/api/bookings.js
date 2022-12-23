@@ -13,7 +13,7 @@ const validateBookings = [
   check('startDate')
     .custom((value) => {
       const date = new Date(value);
-      return!isNaN(date);
+      return !isNaN(date);
     })
     .withMessage('startDate must be a valid date'),
   check('endDate')
@@ -157,13 +157,6 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
 
   const spot = await Spot.findByPk(bookingToDelete.spotId);
 
-  if (Number(user.id) !== Number(spot.ownerId) || Number(user.id) !== Number(bookingToDelete.userId)) {
-    res.status(401);
-    return res.json({
-      message: 'Booking must belong to user or spot owner to delete',
-      statusCode: res.statusCode
-    })
-  }
 
   if (new Date(bookingToDelete.startDate) < new Date()) {
     res.status(403);
@@ -180,7 +173,14 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
       message: 'Successfully deleted',
       statusCode: res.statusCode
     })
+  } else {
+    res.status(401);
+    return res.json({
+      message: 'Booking must belong to user or spot owner to delete',
+      statusCode: res.statusCode
+    })
   }
+
 })
 
 module.exports = router;
