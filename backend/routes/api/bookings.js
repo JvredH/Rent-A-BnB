@@ -157,7 +157,7 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
 
   const spot = await Spot.findByPk(bookingToDelete.spotId);
 
-  if (user.id !== spot.ownerId || user.id !== bookingToDelete.userId) {
+  if (Number(user.id) !== Number(spot.ownerId) || Number(user.id) !== Number(bookingToDelete.userId)) {
     res.status(401);
     return res.json({
       message: 'Booking must belong to user or spot owner to delete',
@@ -173,7 +173,7 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
     })
   }
 
-  if (user.id == spot.ownerId || user.id == bookingToDelete.userId) {
+  if (Number(user.id) == Number(spot.ownerId) || Number(user.id) == Number(bookingToDelete.userId)) {
     bookingToDelete.destroy();
     res.status(200)
     return res.json({
