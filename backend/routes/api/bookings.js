@@ -84,12 +84,13 @@ router.put('/:bookingId', requireAuth, validateBookings, async ( req, res, next 
 
   if (user.id !== booking.userId) {
     res.status(401);
-    res.json({
-      message: 'Only booking creator can edit a booking'
+    return res.json({
+      message: 'Only booking creator can edit a booking',
+      statusCode: res.statusCode
     })
   }
 
-  if (endDate < startDate) {
+  if (new Date(endDate) < new Date(startDate)) {
     res.status(400);
     return res.json({
       message: "Validation error",
@@ -100,7 +101,8 @@ router.put('/:bookingId', requireAuth, validateBookings, async ( req, res, next 
     })
   }
 
-  if (endDate < new Date()) {
+
+  if (new Date(booking.endDate) < new Date()) {
     res.status(403);
     return res.json({
       message: "Past bookings can't be modified",
@@ -155,7 +157,7 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
 
   const spot = await Spot.findByPk(bookingToDelete.spotId);
 
-  if (bookingToDelete.startDate < new Date()) {
+  if (new Date(bookingToDelete.startDate) < new Date()) {
     res.status(403);
     return res.json({
       message: "Bookings that have been started can't be deleted",
@@ -168,6 +170,12 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
     res.status(200)
     return res.json({
       message: 'Successfully deleted',
+      statusCode: res.statusCode
+    })
+  } else {
+    res.status(401);
+    return res.json({
+      message: 'Booking must belong to user or spot owner to delete',
       statusCode: res.statusCode
     })
   }

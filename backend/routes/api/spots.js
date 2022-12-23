@@ -146,11 +146,11 @@ router.post('/:spotId/bookings', requireAuth, async ( req, res, next ) => {
 
   const spot = await Spot.findByPk(spotId);
 
-  // checking to make sure owner is not booking own spot
-  if (user.id == spot.ownerId) {
-    res.status(400);
+  // invalid spot
+  if (!spot) {
+    res.status(404);
     return res.json({
-      message: 'Owner cannot book their own spot',
+      message: "Spot couldn't be found",
       statusCode: res.statusCode
     })
   }
@@ -165,11 +165,21 @@ router.post('/:spotId/bookings', requireAuth, async ( req, res, next ) => {
     })
   }
 
-  // invalid spot
-  if (!spot) {
-    res.status(404);
+  // can't book a date that already passed
+  if (startDate < new Date()){
+    res.status(400);
     return res.json({
-      message: "Spot couldn't be found",
+      message: 'Validation Error',
+      statusCode: res.statusCode,
+      errors: {startDate: "startDate cannot be before today's date"}
+    })
+  }
+
+  // checking to make sure owner is not booking own spot
+  if (user.id == spot.ownerId) {
+    res.status(400);
+    return res.json({
+      message: 'Owner cannot book their own spot',
       statusCode: res.statusCode
     })
   }
@@ -185,7 +195,6 @@ router.post('/:spotId/bookings', requireAuth, async ( req, res, next ) => {
     }
   })
 
-
   if (bookingConflictCheck.length) {
     res.status(403);
     return res.json({
@@ -197,8 +206,6 @@ router.post('/:spotId/bookings', requireAuth, async ( req, res, next ) => {
       }
     })
   }
-
-
 
   const newBooking = await Booking.create({
     spotId: Number(spotId),
