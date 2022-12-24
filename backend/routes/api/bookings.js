@@ -83,9 +83,9 @@ router.put('/:bookingId', requireAuth, validateBookings, async ( req, res, next 
   }
 
   if (user.id !== booking.userId) {
-    res.status(401);
+    res.status(403);
     return res.json({
-      message: 'Only booking creator can edit a booking',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   }
@@ -174,9 +174,9 @@ router.delete('/:bookingId', requireAuth, async ( req, res, next ) => {
       statusCode: res.statusCode
     })
   } else {
-    res.status(401);
+    res.status(403);
     return res.json({
-      message: 'Booking must belong to user or spot owner to delete',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   }
