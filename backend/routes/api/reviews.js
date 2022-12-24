@@ -37,9 +37,9 @@ router.post('/:reviewId/images', requireAuth, async ( req, res, ) => {
   }
 
   if (user.id !== review.userId) {
-    res.status(401);
+    res.status(403);
     return res.json({
-      message: 'Only user that created review can add images',
+      message: 'Forbidden',
       statusCode: res.status
     })
   }
@@ -66,7 +66,6 @@ router.post('/:reviewId/images', requireAuth, async ( req, res, ) => {
   const response = {
     id: newReview.id,
     url: newReview.url,
-
   }
 
   res.json(response)
@@ -137,9 +136,9 @@ router.put('/:reviewId', requireAuth, validateReview, async ( req, res, next ) =
   }
 
   if (reviewToUpdate.userId !== user.id) {
-    res.status(401);
+    res.status(403);
     return res.json({
-      message: 'Only the person that created this review can edit it',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   }
@@ -168,9 +167,9 @@ router.delete('/:reviewId', requireAuth, async ( req, res, next ) => {
   }
 
   if (user.id !== review.userId) {
-    res.status(401);
+    res.status(403);
     return res.json({
-      message: 'Review must belong to user in order to delete',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   } else {

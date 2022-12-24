@@ -213,9 +213,9 @@ router.post('/:spotId/bookings', requireAuth, async ( req, res, next ) => {
 
   // checking to make sure owner is not booking own spot
   if (user.id == spot.ownerId) {
-    res.status(400);
+    res.status(403);
     return res.json({
-      message: 'Owner cannot book their own spot',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   }
@@ -289,7 +289,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async ( req, res, n
   if(user.id == spot.ownerId) {
     res.status(403);
     return res.json({
-      message: 'Owner cannot write a review for their own spot',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   }
@@ -334,9 +334,9 @@ router.post('/:spotId/images', requireAuth, async ( req, res, next ) => {
           preview
         })
       } else {
-        res.status(400)
+        res.status(403)
         return res.json({
-          message: 'Spot must belong to user to add image',
+          message: 'Forbidden',
           statusCode: res.statusCode
         })
       }
@@ -480,9 +480,9 @@ router.put('/:spotId', requireAuth, validateSpot, async ( req, res, next ) => {
   }
 
   if (user.id !== spot.ownerId) {
-    res.status(404);
+    res.status(403);
     return res.json({
-      message: 'Only owner can edit this spot',
+      message: 'Forbidden',
       statusCode: res.statusCode
     })
   }
@@ -517,9 +517,9 @@ router.delete('/:spotId', requireAuth, async ( req, res, next ) => {
   }
 
   if (user.id !== spot.ownerId) {
-    res.status(404);
+    res.status(403);
     return res.json({
-      message: "Only owners can delete this spot",
+      message: "Forbidden",
       statusCode: res.statusCode
     })
   }
