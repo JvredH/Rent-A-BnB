@@ -36,14 +36,14 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
         validate: {
-          isDate: true
+          isDate: true,
         }
       },
       endDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
         validate: {
-          isDate: true
+          isDate: true,
         }
       },
       createdAt: {
