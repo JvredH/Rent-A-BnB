@@ -25,7 +25,8 @@ module.exports = {
       },
       address: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       city: {
         type: Sequelize.STRING,
@@ -40,11 +41,11 @@ module.exports = {
         allowNull: false
       },
       lat: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(3, 7),
         allowNull: false
       },
       lng: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(3,7),
         allowNull: false
       },
       name: {
