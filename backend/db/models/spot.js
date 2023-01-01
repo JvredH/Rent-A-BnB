@@ -54,11 +54,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     lat: {
-      type: DataTypes.DECIMAL(10,7),
+      type: DataTypes.DECIMAL(9,7),
       allowNull: false,
       validate: {
-        min: -180,
-        max: 180
+        min: -90,
+        max: 90
       }
     },
     lng: {
