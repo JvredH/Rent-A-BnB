@@ -27,11 +27,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isDate: true
+      }
     },
     startDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isDate: true
+      }
     },
     endDate: {
      type: DataTypes.DATEONLY,
