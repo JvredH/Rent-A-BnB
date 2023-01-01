@@ -35,10 +35,16 @@ module.exports = {
       startDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
+        validate: {
+          isDate: true
+        }
       },
       endDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
+        validate: {
+          isDate: true
+        }
       },
       createdAt: {
         allowNull: false,
