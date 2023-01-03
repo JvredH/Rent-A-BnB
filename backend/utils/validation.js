@@ -31,6 +31,7 @@ const validationSpots = (req, res, next) => {
       const err = Error('Validation Error');
       err.errors = errors;
       err.status = 400;
+      err.title = 'Bad request.';
 
       // err.title = 'ValidationError';
       // res.json({
@@ -54,6 +55,7 @@ const validationReviews = (req, res, next) => {
       const err = Error('Validation Error');
       err.errors = errors;
       err.status = 400;
+      err.title = 'Bad request.';
       next(err)
   }
   next()
@@ -70,6 +72,7 @@ const validationBookings = (req, res, next) => {
       const err = Error('Validation Error');
       err.errors = errors;
       err.status = 400;
+      err.title = 'Bad request.';
       next(err)
   }
   next()
@@ -86,6 +89,7 @@ const validateQuery = ( req, res, next ) => {
       const err = Error('Validation Error');
       err.errors = errors;
       err.status = 400;
+      err.title = 'Bad request.';
       next(err)
   }
   next()

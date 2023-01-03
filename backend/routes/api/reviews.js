@@ -13,7 +13,7 @@ const validateReview = [
     .exists({ checkFalsy: true })
     .withMessage('Review text is required'),
   check('stars')
-    .exists({ checkFalsy: true })
+    // .exists({ checkFalsy: true })
     .isInt({min: 1, max: 5})
     .withMessage('Stars must be an integer from 1 to 5'),
   validationReviews
@@ -50,7 +50,7 @@ router.post('/:reviewId/images', requireAuth, async ( req, res, ) => {
     }
   })
 
-  if (reviewImages.length > 10) {
+  if (reviewImages.length >= 10) {
     res.status(403);
     return res.json({
       message: 'Maximum number of images for this resource was reached',
