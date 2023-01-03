@@ -27,16 +27,16 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .withMessage('Country is required'),
   check('lat')
-    .exists({ checkFalsy: true })
-    .isDecimal()
+    // .exists({ checkFalsy: true })
+    .isDecimal({min: -90, max: 90})
     .withMessage('Latitude is not valid'),
   check('lng')
-    .exists({ checkFalsy: true })
-    .isDecimal()
+    // .exists({ checkFalsy: true })
+    .isDecimal({min: -180, max: 180})
     .withMessage('Longitude is not valid'),
   check('name')
-    .exists({ checkFalsy: true })
-    .isLength({max: 50})
+    // .exists({ checkFalsy: true })
+    .isLength({max: 50, min: 1})
     .withMessage('Name must be less than 50 characters'),
   check('description')
     .exists({ checkFalsy: true })
