@@ -378,8 +378,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
     let sum = 0;
     reviewsArr.forEach(star => {
       sum += star.stars
-      spot.avgRating = sum / arrLength
+      spot.avgRating = (sum / arrLength).toFixed(2)
     })
+    if (!spot.avgRating) spot.avgRating = 'New'
     delete spot.Reviews
   })
 
@@ -439,8 +440,12 @@ router.get('/:spotId', async ( req, res, next ) => {
 
   reviews.forEach(star => {
     total += star.stars
-    spotJson.avgStarRating = total / numReviews;
+    spotJson.avgStarRating = (total / numReviews).toFixed(2);
   })
+
+  if (!spotJson.avgStarRating) {
+    spotJson.avgStarRating = 'new'
+  }
 
   let SpotImages = spotJson.SpotImages;
 
@@ -650,8 +655,9 @@ router.get('/', validateQueryParams, async (req, res, next) => {
     let sum = 0;
     reviewsArr.forEach(star => {
       sum += star.stars
-      spot.avgRating = sum / arrLength
+      spot.avgRating = (sum / arrLength).toFixed(2)
     })
+    if (!spot.avgRating) spot.avgRating = 'New'
     delete spot.Reviews
   })
 

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 const SpotCards = ({spot}) => {
   // console.log('from spots card :', spot)
+  const star = String.fromCharCode(0x2605)
+
   return (
     <div className='spot-card-container'>
       <Link className='cards' to={`/spots/${spot.id}`}>
@@ -11,9 +13,9 @@ const SpotCards = ({spot}) => {
         <div>
           <div className='location-and-rating'>
             <div>{`${spot.city}, ${spot.state}`}</div>
-            <div>{spot.avgRating}</div>
+            <div>{`${star} ${spot.avgRating}`}</div>
           </div>
-          <div>{`${spot.price}`}</div>
+          <div>{`$${spot.price}`}</div>
         </div>
       </Link>
     </div>
