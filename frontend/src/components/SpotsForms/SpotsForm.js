@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createSpotThunk } from "../../store/spotsReducer";
-import { useHistory } from "react-router-dom";
+import { createSpotThunk, editSpotThunk } from "../../store/spotsReducer";
+import { useHistory} from "react-router-dom";
 
 const SpotsForm = ({spot, formType}) => {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const sessionUser = useSelector(state => state.session)
   const [address, setAddress] = useState(spot.address);
   const [city, setCity] = useState(spot.city);
@@ -16,6 +16,7 @@ const SpotsForm = ({spot, formType}) => {
   const [price, setPrice] = useState(spot.price);
   const [url, setUrl] = useState(spot.url)
   const [errors, setErrors] = useState([]);
+
 
 
   async function handleSubmit(e) {
@@ -40,6 +41,17 @@ const SpotsForm = ({spot, formType}) => {
       preview: true
     }
 
+    if (formType === 'Edit Spot') {
+      return await dispatch(editSpotThunk(spotToCreate, spot.id))
+        .then(() => history.push(`/spots/${spot.id}`))
+        .catch(
+          async (res) => {
+            const data = await res.json();
+            if(data && data.errors) setErrors(data.errors)
+          }
+        )
+    }
+
     if(formType === 'Create Spot') {
       return await dispatch(createSpotThunk(spotToCreate, newSpotImage))
         .then(res => history.push(`/spots/${res.id}`))
@@ -50,7 +62,10 @@ const SpotsForm = ({spot, formType}) => {
           }
         )
     }
+
   }
+
+  //  const imgInput = {imgLabel: <label>Image URL of Spot<input type='url' value={url} onChange={(e) => setUrl(e.target.value)}/></label>}
 
   return (
     <form onSubmit={handleSubmit}>
@@ -114,9 +129,10 @@ const SpotsForm = ({spot, formType}) => {
           value={price}
           onChange={(e) => setPrice(e.target.value)} />
       </label>
+      {/* {formType !== 'Create Spot' ? null : imgInput.imgLabel} */}
       <label>
-        Image URL of Spot
-        <input
+         Image URL of Spot
+         <input
           type='url'
           value={url}
           onChange={(e) => setUrl(e.target.value)}

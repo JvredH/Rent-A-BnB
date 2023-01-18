@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneSpotThunk } from "../../store/spotsReducer";
 import './SpotDetails.css'
 import DeleteSpot from "./DeleteSpot";
+// import EditSpot from "../SpotsForms/EditSpot";
+import { Link } from "react-router-dom";
 
 const SpotDetails = () => {
   let {spotId} = useParams()
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
-  console.log('spot ====> ', spot)
+  // console.log('spot ====> ', spot)
   const star = String.fromCharCode(0x2605)
 
 
@@ -27,6 +29,7 @@ const SpotDetails = () => {
           </div>
           <div className='spot-location-container'>
             <p>{`${star} ${spot.avgStarRating} - ${spot.numReviews} reviews - ${spot.city}, ${spot.state}, ${spot.country}`}</p>
+            <Link to={`/spots/${spot.id}/edit`}>Edit</Link>
             <div>edit / <DeleteSpot spot={spot}/></div> {/* make it so that edit/delete only appears if owner of spot is viewing */}
           </div>
           <div>

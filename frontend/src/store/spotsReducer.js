@@ -4,6 +4,7 @@ const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const LOAD_ONE_SPOT = 'spots/LOAD_ONE_SPOT'
 const DELETE_SPOT = 'spots/DELETE_SPOT'
 const CREATE_SPOT = 'spots/CREATE_SPOT'
+const EDIT_SPOT = 'spots/EDIT_SPOT'
 
 // Actions
 export const loadSpots = (spots) => {
@@ -31,6 +32,13 @@ export const createSpot = (newSpot) => {
   return ({
     type: CREATE_SPOT,
     newSpot
+  })
+}
+
+export const editSpot = (updates) => {
+  return ({
+    type: EDIT_SPOT,
+    updates
   })
 }
 
@@ -88,6 +96,19 @@ export const createSpotThunk = (spotToCreate, newSpotImage) => async dispatch =>
   }
 }
 
+export const editSpotThunk = (spotToCreate, id) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(spotToCreate)
+  })
+
+  if (response.ok) {
+    const updates = await response.json();
+    dispatch(editSpot(updates))
+  }
+}
+
 
 const initialState = {}
 
@@ -104,15 +125,20 @@ const spotsReducer = (state = initialState, action) => {
     }
     case LOAD_ONE_SPOT : {
       // console.log('from reducer ===> ', state)
-      const newState = {};
+      const newState = {...state};
       // console.log('action.spot ====> ', action.spot)
       newState[action.spot.id] = action.spot
-      console.log('from reducer ===> ', newState)
+      // console.log('from reducer ===> ', newState)
       return newState;
     }
     case CREATE_SPOT : {
       const newState = {...state};
       newState[action.newSpot.id] = action.newSpot
+      return newState
+    }
+    case EDIT_SPOT : {
+      const newState = {...state};
+      newState[action.updates.id] = action.updates;
       return newState
     }
     case DELETE_SPOT : {
