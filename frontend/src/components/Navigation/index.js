@@ -9,41 +9,44 @@ import './Navigation.css';
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
-  // let session;
+  let session;
 
-  // if (!sessionUser) {
-  //   session = (
-  //     <ProfileButton user={sessionUser} />
-  //   )
-  // } else {
-  //   session = (
-  //     <div>
-  //       <OpenModalButton
-  //         buttonText="Create Spot"
-  //         modalComponent={<CreateSpot />}
-  //         />
-  //       <ProfileButton user={sessionUser} />
-  //     </div>
-  //   )
-  // }
+  if (!sessionUser) {
+    session = (
+      <div>
+        <ProfileButton user={sessionUser} />
+      </div>
+    )
+  } else {
+    session = (
+      <div className='right-nav-container'>
+        <div>
+          <Link to='/spots/new'>Create Spot</Link>
+        </div>
+        <div>
+          <ProfileButton user={sessionUser} />
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <ul className='top-nav'>
-      <li>
+    <div className='top-nav'>
+      <div>
         <NavLink exact to="/">Home</NavLink>
-      </li>
+      </div>
       {isLoaded && (
-        // session
-        <div>
-          <li>
-            <Link to='/spots/new'>Create Spot</Link> {/* delete this link, list and parent div, for testing purposes */}
-          </li>
-          <li>
-            <ProfileButton user={sessionUser} />
-          </li>
-        </div>
+        session
+        // <div>
+        //   <div>
+        //     <Link to='/spots/new'>Create Spot</Link> {/* delete this link, list and parent div, for testing purposes */}
+        //   </div>
+        //   <div>
+        //     <ProfileButton user={sessionUser} />
+        //   </div>
+        // </div>
       )}
-    </ul>
+    </div>
   );
 }
 

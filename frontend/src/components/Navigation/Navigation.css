@@ -9,3 +9,7 @@
 .hidden {
   display: none
 }
+
+.right-nav-container {
+  display: flex;
+}

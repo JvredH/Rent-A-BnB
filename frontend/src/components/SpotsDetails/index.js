@@ -12,13 +12,31 @@ const SpotDetails = () => {
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
-  // console.log('spot ====> ', spot)
+  const user = useSelector(state => state.session.user)
+  console.log('spot ====> ', spot)
+  // console.log('user ====> ', user)
   const star = String.fromCharCode(0x2605)
 
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
   }, [dispatch, spotId])
+
+  let session;
+
+  if (user && user.id === spot.ownerId) {
+    session = (
+      <div>
+        <Link to={`/spots/${spot.id}/edit`}>
+          <button>Edit</button>
+        </Link>
+        <DeleteSpot spot={spot}/>
+      </div>
+    )
+  } else {
+    session = null;
+  }
+
 
   return(
     <>
@@ -29,11 +47,23 @@ const SpotDetails = () => {
           </div>
           <div className='spot-location-container'>
             <p>{`${star} ${spot.avgStarRating} - ${spot.numReviews} reviews - ${spot.city}, ${spot.state}, ${spot.country}`}</p>
-            <Link to={`/spots/${spot.id}/edit`}>Edit</Link>
-            <div>edit / <DeleteSpot spot={spot}/></div> {/* make it so that edit/delete only appears if owner of spot is viewing */}
+            {session}
+            {/* <div>
+              <Link to={`/spots/${spot.id}/edit`}>
+                <button>Edit</button>
+              </Link>
+              <DeleteSpot spot={spot}/>
+            </div> */}
           </div>
           <div>
             <img alt='' src={`${spot.SpotImages[0].url}`}/>
+          </div>
+          <div className='under-image-section'>
+            <div className='host-desc'>
+              <h3>Entire Home Hosted By {spot.Owner.firstName}</h3>
+              <p className='description'>{spot.description}</p>
+            </div>
+            <div>price x Review, throw create button in here</div>
           </div>
         </div>
       )}
