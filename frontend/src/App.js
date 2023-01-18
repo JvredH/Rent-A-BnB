@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Spots from "./components/Spots";
+import SpotDetails from './components/SpotsDetails/index'
+import CreateSpot from "./components/SpotsForms/CreateSpot";
+import EditSpot from "./components/SpotsForms/EditSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +20,18 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/spots/new'> {/* delete this later, for testing purposes*/}
+            <CreateSpot />
+          </Route>
+          <Route path='/spots/:spotId/edit'>
+            <EditSpot />
+          </Route>
+          <Route path='/' exact>
+            <Spots />
+          </Route>
+          <Route path='/spots/:spotId'>
+            <SpotDetails />
+          </Route>
         </Switch>
       )}
     </>
