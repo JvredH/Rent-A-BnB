@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const LOAD_ONE_SPOT = 'spots/LOAD_ONE_SPOT'
 const DELETE_SPOT = 'spots/DELETE_SPOT'
+const CREATE_SPOT = 'spots/CREATE_SPOT'
 
 // Actions
 export const loadSpots = (spots) => {
@@ -24,11 +25,18 @@ export const deleteSpot = (spotId) => {
     type: DELETE_SPOT,
     spotId
   })
-
 }
 
+export const createSpot = (newSpot) => {
+  return ({
+    type: CREATE_SPOT,
+    newSpot
+  })
+}
+
+
 // Thunks
-export const getAllSpots = () => async dispatch => {
+export const getAllSpotsThunk = () => async dispatch => {
   const response = await csrfFetch(`/api/spots`);
   if (response.ok) {
     const spots = await response.json();
@@ -37,7 +45,7 @@ export const getAllSpots = () => async dispatch => {
   }
 }
 
-export const getOneSpot = (spotId) => async dispatch => {
+export const getOneSpotThunk = (spotId) => async dispatch => {
   const response = await csrfFetch(`/api/spots/${spotId}`);
 
   if (response.ok) {
@@ -46,7 +54,7 @@ export const getOneSpot = (spotId) => async dispatch => {
   }
 }
 
-export const deleteOneSpot = (spotId) => async dispatch => {
+export const deleteOneSpotThunk = (spotId) => async dispatch => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'DELETE',
   });
@@ -56,6 +64,29 @@ export const deleteOneSpot = (spotId) => async dispatch => {
   }
 }
 
+export const createSpotThunk = (spotToCreate, newSpotImage) => async dispatch => {
+  const response = await csrfFetch(`/api/spots`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(spotToCreate)
+  });
+
+  if (response.ok) {
+    const newSpotData = await response.json();
+    const response2 = await csrfFetch(`/api/spots/${newSpotData.id}/images`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newSpotImage)
+    });
+
+    if (response2.ok) {
+      const newImgData = await response2.json();
+      newSpotData.previewImage = newImgData.url;
+      dispatch(createSpot(newSpotData))
+      return newSpotData
+    }
+  }
+}
 
 
 const initialState = {}
@@ -78,6 +109,11 @@ const spotsReducer = (state = initialState, action) => {
       newState[action.spot.id] = action.spot
       console.log('from reducer ===> ', newState)
       return newState;
+    }
+    case CREATE_SPOT : {
+      const newState = {...state};
+      newState[action.newSpot.id] = action.newSpot
+      return newState
     }
     case DELETE_SPOT : {
       const newState = {...state};

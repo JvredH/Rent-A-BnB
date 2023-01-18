@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneSpot } from "../../store/spotsReducer";
+import { getOneSpotThunk } from "../../store/spotsReducer";
 import './SpotDetails.css'
 import DeleteSpot from "./DeleteSpot";
 
@@ -15,7 +15,7 @@ const SpotDetails = () => {
 
 
   useEffect(() => {
-    dispatch(getOneSpot(spotId)).then(() => setIsLoaded(true))
+    dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
   }, [dispatch, spotId])
 
   return(

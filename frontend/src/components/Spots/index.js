@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllSpots } from '../../store/spotsReducer';
+import { getAllSpotsThunk } from '../../store/spotsReducer';
 import SpotCards from '../SpotsCards';
 import './Spots.css'
 
@@ -12,7 +12,7 @@ const Spots = () => {
 
 
   useEffect(() => {
-    dispatch(getAllSpots())
+    dispatch(getAllSpotsThunk())
   }, [dispatch])
 
 
