@@ -13,7 +13,7 @@ const SpotDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
   const user = useSelector(state => state.session.user)
-  // console.log('spot ====> ', spot)
+  console.log('spot ====> ', spot)
   // console.log('user ====> ', user)
   const star = String.fromCharCode(0x2605)
 
@@ -57,6 +57,13 @@ const SpotDetails = () => {
           </div>
           <div>
             <img alt='' src={`${spot.SpotImages[0].url}`}/>
+          </div>
+          <div className='under-image-section'>
+            <div className='host-desc'>
+              <h3>Entire Home Hosted By {spot.Owner.firstName}</h3>
+              <p className='description'>{spot.description}</p>
+            </div>
+            <div>price x Review, throw create button in here</div>
           </div>
         </div>
       )}
