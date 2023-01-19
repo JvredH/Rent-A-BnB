@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneSpotThunk } from "../../store/spotsReducer";
 import './SpotDetails.css'
 import DeleteSpot from "./DeleteSpot";
+import SpotReviews from "../SpotReviews/SpotReviews";
 // import EditSpot from "../SpotsForms/EditSpot";
 import { Link } from "react-router-dom";
+
 
 const SpotDetails = () => {
   let {spotId} = useParams()
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
+  const prevState = {...spot};
   const user = useSelector(state => state.session.user)
   console.log('spot ====> ', spot)
   // console.log('user ====> ', user)
@@ -24,7 +27,7 @@ const SpotDetails = () => {
 
   let session;
 
-  if (user && user.id === spot.ownerId) {
+  if (user && user.id === prevState.ownerId) {
     session = (
       <div>
         <Link to={`/spots/${spot.id}/edit`}>
@@ -65,6 +68,7 @@ const SpotDetails = () => {
             </div>
             <div>price x Review, throw create button in here</div>
           </div>
+          <div> <SpotReviews spot={spot}/> </div>
         </div>
       )}
     </>
