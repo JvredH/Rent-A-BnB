@@ -65,7 +65,10 @@ const SpotDetails = () => {
               <h3>Entire Spot Hosted By {spot.Owner.firstName}</h3>
               <p className='description'>{spot.description}</p>
             </div>
-            <div>price x Review, throw create button in here</div>
+            <div>
+              <div>price x Review, throw create button in here</div>
+              <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link>
+            </div>
           </div>
           <div className='box-under-host-desc'>
             <h3>{`${star} ${spot.avgStarRating} - ${spot.numReviews} Reviews`}</h3>

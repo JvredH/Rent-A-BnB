@@ -20,7 +20,7 @@ const SpotReviewCards = ({spot}) => {
     let formattedDate = date.toLocaleString('default', {month: 'long', year:'numeric'})
 
     return (
-      <div className='review-card'>
+      <div className='review-card' key={review.id}>
         <div>{review.User.firstName}</div>
         <div>{`${star} ${review.stars}`}</div>
         <div>{formattedDate}</div>
