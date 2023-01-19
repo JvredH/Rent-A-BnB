@@ -6,6 +6,7 @@ import './SpotDetails.css'
 import DeleteSpot from "./DeleteSpot";
 // import EditSpot from "../SpotsForms/EditSpot";
 import { Link } from "react-router-dom";
+import SpotReviewCards from "../SpotReviews/SpotReviewCards";
 
 const SpotDetails = () => {
   let {spotId} = useParams()
@@ -13,8 +14,9 @@ const SpotDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
   const user = useSelector(state => state.session.user)
-  console.log('spot ====> ', spot)
+  // console.log('spot ====> ', spot)
   // console.log('user ====> ', user)
+  const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
 
 
@@ -24,7 +26,7 @@ const SpotDetails = () => {
 
   let session;
 
-  if (user && user.id === spot.ownerId) {
+  if (user && user.id === prevState.ownerId) {
     session = (
       <div>
         <Link to={`/spots/${spot.id}/edit`}>
@@ -60,10 +62,14 @@ const SpotDetails = () => {
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>
-              <h3>Entire Home Hosted By {spot.Owner.firstName}</h3>
+              <h3>Entire Spot Hosted By {spot.Owner.firstName}</h3>
               <p className='description'>{spot.description}</p>
             </div>
             <div>price x Review, throw create button in here</div>
+          </div>
+          <div className='box-under-host-desc'>
+            <h3>{`${star} ${spot.avgStarRating} - ${spot.numReviews} Reviews`}</h3>
+            <div className='whole-card-container'> <SpotReviewCards spot={spot}/> </div>
           </div>
         </div>
       )}

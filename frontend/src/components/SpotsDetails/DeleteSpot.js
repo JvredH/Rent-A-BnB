@@ -7,7 +7,7 @@ const DeleteSpot = ({spot}) => {
   const dispatch = useDispatch()
   const history = useHistory();
   const spotId = spot.id
-  console.log(spot)
+  // console.log(spot)
 
   const handleDelete = () => {
     dispatch(deleteOneSpotThunk(spotId))
