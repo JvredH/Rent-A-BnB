@@ -9,7 +9,7 @@ const SpotReviewCards = ({spot, user}) => {
   const reviewsArray = Object.values(allReviews)
   // console.log('from spotReviewCards.js ', reviewsArray);
   const star = String.fromCharCode(0x2605)
-  console.log(`user from review card`, user)
+  // console.log(`user from review card`, user)
 
   useEffect(() => {
     dispatch(loadSpotReviewsThunk(spot.id))
@@ -17,29 +17,52 @@ const SpotReviewCards = ({spot, user}) => {
 
   let xButton;
 
+  // if (review.userId === user.id) {
+  //   xButton = (
+  //     <div className='name-delete'>
+  //       <div>{review.User.firstName}</div>
+  //       <div><DeleteReview review={review}/></div>
+  //   </div>
+  //   )
+  // } else {
+  //   xButton = (
+  //     <div className='name-delete'>
+  //       <div>{review.User.firstName}</div>
+  //       <div>{null}</div>
+  //     </div>
+  //   )
+  // }
+
 
   const cards = reviewsArray.map(review => {
     let dateString = review.createdAt;
     let date = new Date(dateString);
     let formattedDate = date.toLocaleString('default', {month: 'long', year:'numeric'})
-    console.log(review)
+    // console.log(review)
 
-
-    if (review.userId === user.id) {
-      xButton = (
-        <div className='name-delete'>
-          <div>{review.User.firstName}</div>
-          <div><DeleteReview review={review}/></div>
-      </div>
-      )
-    } else {
+    if (user === null) {
       xButton = (
         <div className='name-delete'>
           <div>{review.User.firstName}</div>
           <div>{null}</div>
         </div>
       )
-    }
+      } else if ( review.userId === user.id) {
+        xButton = (
+          <div className='name-delete'>
+            <div>{review.User.firstName}</div>
+            <div><DeleteReview review={review}/></div>
+        </div>
+      )
+      } else {
+        xButton = (
+          <div className='name-delete'>
+            <div>{review.User.firstName}</div>
+            <div>{null}</div>
+          </div>
+        )
+      }
+
 
     return (
       <div className='review-card' key={review.id}>
