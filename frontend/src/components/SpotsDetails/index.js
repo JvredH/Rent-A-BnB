@@ -18,11 +18,12 @@ const SpotDetails = () => {
   // console.log('user ====> ', user)
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
+  const reviews = useSelector (state => state.reviews)
 
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
-  }, [dispatch, spotId])
+  }, [dispatch, spotId, reviews])
 
   let session;
 
@@ -72,7 +73,7 @@ const SpotDetails = () => {
           </div>
           <div className='box-under-host-desc'>
             <h3>{`${star} ${spot.avgStarRating} - ${spot.numReviews} Reviews`}</h3>
-            <div className='whole-card-container'> <SpotReviewCards spot={spot}/> </div>
+            <div className='whole-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
           </div>
         </div>
       )}

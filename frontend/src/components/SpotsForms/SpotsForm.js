@@ -62,7 +62,6 @@ const SpotsForm = ({spot, formType}) => {
           }
         )
     }
-
   }
 
   //  const imgInput = {imgLabel: <label>Image URL of Spot<input type='url' value={url} onChange={(e) => setUrl(e.target.value)}/></label>}

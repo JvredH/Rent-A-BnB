@@ -18,8 +18,7 @@ const ReviewForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     setErrors([])
-
-    console.log('spotId======> ' , spotId)
+    // console.log('spotId======> ' , spotId)
 
     const newReview = {
       review,
@@ -28,15 +27,14 @@ const ReviewForm = () => {
 
     const userInfo = { User: user }
 
-    await dispatch(createReviewThunk(newReview, userInfo, spotId))
-      .then(history.push(`/spots/${spotId}`))
+    return await dispatch(createReviewThunk(newReview, userInfo, spotId))
+      .then(() => history.push(`/spots/${spotId}`))
       .catch(
         async (res) => {
           const data = await res.json();
           if(data && data.errors) setErrors(data.errors)
         }
       )
-
   }
 
 
