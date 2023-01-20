@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { deleteReviewThunk } from "../../store/reviewsReducer";
-import { useEffect } from "react";
-import { getOneSpotThunk } from "../../store/spotsReducer";
+// import { useEffect } from "react";
+// import { getOneSpotThunk } from "../../store/spotsReducer";
 
 const DeleteReview = ({review}) => {
   const dispatch = useDispatch();
