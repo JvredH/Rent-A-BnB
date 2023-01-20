@@ -19,6 +19,7 @@ const SpotDetails = () => {
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
   const reviews = useSelector (state => state.reviews)
+  console.log('prevState ====' , prevState);
 
 
   useEffect(() => {
@@ -38,6 +39,14 @@ const SpotDetails = () => {
     )
   } else {
     session = null;
+  }
+
+  let reviewButton;
+
+  if(!user || user.id === prevState.ownerId) {
+    reviewButton = (<div>{null}</div>)
+  } else {
+    reviewButton = <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link>
   }
 
 
@@ -66,9 +75,13 @@ const SpotDetails = () => {
               <h3>Entire Spot Hosted By {spot.Owner.firstName}</h3>
               <p className='description'>{spot.description}</p>
             </div>
-            <div>
-              <div>price x Review, throw create button in here</div>
-              <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link>
+            <div className='right-desc'>
+              <div>
+                <div>{`${spot.price} night`}</div>
+                <div>{`${star} - ${spot.avgStarRating} - ${spot.numReviews} reviews `}</div>
+              </div>
+              {reviewButton}
+              {/* <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link> */}
             </div>
           </div>
           <div className='box-under-host-desc'>

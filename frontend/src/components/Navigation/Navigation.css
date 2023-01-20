@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  border: 1px solid red
-
+  border: 1px solid red;
+  height: 80px;
 }
 
 .hidden {
