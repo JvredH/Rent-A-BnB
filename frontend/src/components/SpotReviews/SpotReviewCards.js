@@ -2,6 +2,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { loadSpotReviewsThunk } from "../../store/reviewsReducer";
 import { useEffect } from "react";
 import DeleteReview from "./DeleteReview";
+import './spotReviews.css'
 
 const SpotReviewCards = ({spot, user}) => {
   const dispatch = useDispatch();

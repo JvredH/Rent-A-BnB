@@ -20,7 +20,7 @@ function Navigation({ isLoaded }){
   } else {
     session = (
       <div className='right-nav-container'>
-        <div>
+        <div className='create-spot-button'>
           <Link to='/spots/new'>Create Spot</Link>
         </div>
         <div>

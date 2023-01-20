@@ -19,6 +19,7 @@ const SpotDetails = () => {
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
   const reviews = useSelector (state => state.reviews)
+  console.log('prevState ====' , prevState);
 
 
   useEffect(() => {
@@ -40,11 +41,19 @@ const SpotDetails = () => {
     session = null;
   }
 
+  let reviewButton;
+
+  if(!user || user.id === prevState.ownerId) {
+    reviewButton = (<div>{null}</div>)
+  } else {
+    reviewButton = <Link to={`/spots/${spotId}/reviews/new`}><button className='review-button'>Leave a Review</button></Link>
+  }
+
 
   return(
     <>
       {isLoaded && (
-        <div>
+        <div className='main-container'>
           <div>
             <h1>{spot.name}</h1>
           </div>
@@ -58,22 +67,27 @@ const SpotDetails = () => {
               <DeleteSpot spot={spot}/>
             </div> */}
           </div>
-          <div>
-            <img alt='' src={`${spot.SpotImages[0].url}`}/>
+          <div className='image-container'>
+            <img alt='' className='image' src={`${spot.SpotImages[0].url}`}/>
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>
               <h3>Entire Spot Hosted By {spot.Owner.firstName}</h3>
               <p className='description'>{spot.description}</p>
             </div>
-            <div>
-              <div>price x Review, throw create button in here</div>
-              <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link>
+            <div className='right-desc'>
+              <div className='right-desc-price'>
+                <div>{`$${spot.price} night`}</div>
+                <div>{`${star} - ${spot.avgStarRating} - ${spot.numReviews} reviews `}</div>
+              </div>
+              <div className='review-button-container'>{reviewButton}</div>
+
+              {/* <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link> */}
             </div>
           </div>
           <div className='box-under-host-desc'>
             <h3>{`${star} ${spot.avgStarRating} - ${spot.numReviews} Reviews`}</h3>
-            <div className='whole-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
+            <div className='main-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
           </div>
         </div>
       )}

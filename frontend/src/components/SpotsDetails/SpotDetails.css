@@ -1,7 +1,29 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 60%
+}
+
+.image-container {
+  height: 30vw;
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 17px;
+}
+
 .spot-location-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .under-image-section {
@@ -10,3 +32,41 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.main-card-container {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.right-desc {
+  border: black 1px solid;
+  width: 300px;
+  border-radius: 10px;
+  /* display: flex;
+  flex-direction: column */
+}
+
+.right-desc-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.review-button {
+  width: 275px;
+  margin-bottom: 10px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.review-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+/* body {
+  padding-left: 40px;
+  padding-right: 40px;
+} */
