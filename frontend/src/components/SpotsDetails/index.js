@@ -19,8 +19,19 @@ const SpotDetails = () => {
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
   const reviews = useSelector (state => state.reviews)
-  console.log('prevState ====' , prevState);
 
+  const reviewsArray = Object.values(reviews)
+  // console.log('prevState ====' , prevState);
+
+  // console.log('prevState', prevState)
+  // console.log('user =====', user)
+  // console.log('reviews =====' ,reviews)
+
+  // let firstName = user.firstName
+
+  // let reviewer;
+
+  // reviewsArray.forEach(review => User.firstName === user.firstName ? reviewer = true : reviewer = false)
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
@@ -43,10 +54,18 @@ const SpotDetails = () => {
 
   let reviewButton;
 
-  if(!user || user.id === prevState.ownerId) {
+  if(!user || user.id === prevState.ownerId ) {
     reviewButton = (<div>{null}</div>)
   } else {
     reviewButton = <Link to={`/spots/${spotId}/reviews/new`}><button className='review-button'>Leave a Review</button></Link>
+  }
+
+  if (user) {
+    reviewsArray.forEach(review => {
+      if (review.User.id === user.id) {
+        reviewButton = (<div>{null}</div>)
+      }
+    })
   }
 
 

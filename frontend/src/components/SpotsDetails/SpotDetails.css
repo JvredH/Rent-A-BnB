@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-  max-width: 60%
+  max-width: 60%;
+  min-width: 40%;
 }
 
 .image-container {

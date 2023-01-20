@@ -24,3 +24,7 @@
 .create-spot-button {
   margin-right: 15px;
 }
+
+textarea {
+  resize: none;
+}
