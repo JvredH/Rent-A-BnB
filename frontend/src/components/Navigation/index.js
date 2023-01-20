@@ -23,7 +23,7 @@ function Navigation({ isLoaded }){
         <div className='create-spot-button'>
           <Link to='/spots/new'>Create Spot</Link>
         </div>
-        <div>
+        <div className='profile-button'>
           <ProfileButton user={sessionUser} />
         </div>
       </div>

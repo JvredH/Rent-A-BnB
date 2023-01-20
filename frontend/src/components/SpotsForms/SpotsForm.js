@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createSpotThunk, editSpotThunk } from "../../store/spotsReducer";
 import { useHistory} from "react-router-dom";
 import './SpotsForm.css'
@@ -65,6 +65,23 @@ const SpotsForm = ({spot, formType}) => {
     }
   }
 
+  let imgInput;
+
+  if (formType === 'Create Spot') {
+    imgInput = (
+      <label>
+          Image URL of Spot
+          <input
+            type='url'
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </label>
+    )
+  } else {
+    imgInput = null;
+  }
+
   //  const imgInput = {imgLabel: <label>Image URL of Spot<input type='url' value={url} onChange={(e) => setUrl(e.target.value)}/></label>}
 
   return (
@@ -117,11 +134,10 @@ const SpotsForm = ({spot, formType}) => {
         </label>
         <label>
           Description
-          <textarea
+          <input
             value={description}
-            onChange={(e) => setDescription(e.target.value)}>
-              Description of spot...
-          </textarea>
+            onChange={(e) => setDescription(e.target.value)}
+            />
         </label>
         <label>
           Price
@@ -130,17 +146,18 @@ const SpotsForm = ({spot, formType}) => {
             value={price}
             onChange={(e) => setPrice(e.target.value)} />
         </label>
+        {imgInput}
         {/* {formType !== 'Create Spot' ? null : imgInput.imgLabel} */}
-        <label>
+        {/* <label>
           Image URL of Spot
           <input
             type='url'
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-        </label>
+        </label> */}
         <button type='submit'>
-          submit/edit spot
+          Submit
         </button>
       </form>
     </div>

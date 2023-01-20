@@ -33,7 +33,9 @@ const ReviewForm = () => {
       .catch(
         async (res) => {
           const data = await res.json();
+          console.log(data)
           if(data && data.errors) setErrors(data.errors)
+          if (data && data.messages) setErrors(data.messages)
         }
       )
   }
