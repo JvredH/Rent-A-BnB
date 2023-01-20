@@ -2,9 +2,16 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  align-items: center;
+  /* padding-left: 100px;
+  padding-right: 100px; */
   border: 1px solid red;
+  border-bottom: grey solid 1px;
   height: 80px;
+  margin-bottom: 30px;
+  width: 100%;
 }
+
 
 .hidden {
   display: none
@@ -12,4 +19,8 @@
 
 .right-nav-container {
   display: flex;
+}
+
+.create-spot-button {
+  margin-right: 15px;
 }

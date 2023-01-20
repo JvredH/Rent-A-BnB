@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpotThunk, editSpotThunk } from "../../store/spotsReducer";
 import { useHistory} from "react-router-dom";
+import './SpotsForm.css'
 
 const SpotsForm = ({spot, formType}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUser = useSelector(state => state.session)
+  // const sessionUser = useSelector(state => state.session)
   const [address, setAddress] = useState(spot.address);
   const [city, setCity] = useState(spot.city);
   const [state, setState] = useState(spot.state);
@@ -67,80 +68,82 @@ const SpotsForm = ({spot, formType}) => {
   //  const imgInput = {imgLabel: <label>Image URL of Spot<input type='url' value={url} onChange={(e) => setUrl(e.target.value)}/></label>}
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{formType}</h2>
-      <ul className='errors'>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Address
-        <input
-          type='text'
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </label>
-      <label>
-        City
-        <input
-          type='text'
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-      </label>
-      <label>
-        State
-        <input
-          type='text'
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-        />
-      </label>
-      <label>
-        Country
-        <input
-          type='text'
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        />
-      </label>
-      <label>
-        Name
-        <input
-          type='text'
-          value={name}
-          onChange={(e) => setName(e.target.value)}/>
-      </label>
-      <label>
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}>
-            Description of spot...
-        </textarea>
-      </label>
-      <label>
-        Price
-        <input
-          type='number'
-          value={price}
-          onChange={(e) => setPrice(e.target.value)} />
-      </label>
-      {/* {formType !== 'Create Spot' ? null : imgInput.imgLabel} */}
-      <label>
-         Image URL of Spot
-         <input
-          type='url'
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </label>
-      <button type='submit'>
-        submit/edit spot
-      </button>
-    </form>
+    <div className='create-spot-form-container'>
+      <form onSubmit={handleSubmit} className='spotForm'>
+        <h2>{formType}</h2>
+        <ul className='errors'>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Address
+          <input
+            type='text'
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </label>
+        <label>
+          City
+          <input
+            type='text'
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </label>
+        <label>
+          State
+          <input
+            type='text'
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          />
+        </label>
+        <label>
+          Country
+          <input
+            type='text'
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+        </label>
+        <label>
+          Name
+          <input
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}/>
+        </label>
+        <label>
+          Description
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}>
+              Description of spot...
+          </textarea>
+        </label>
+        <label>
+          Price
+          <input
+            type='number'
+            value={price}
+            onChange={(e) => setPrice(e.target.value)} />
+        </label>
+        {/* {formType !== 'Create Spot' ? null : imgInput.imgLabel} */}
+        <label>
+          Image URL of Spot
+          <input
+            type='url'
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </label>
+        <button type='submit'>
+          submit/edit spot
+        </button>
+      </form>
+    </div>
   );
 }
 

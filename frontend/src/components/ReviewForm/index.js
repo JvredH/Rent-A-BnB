@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {createReviewThunk } from '../../store/reviewsReducer'
 import { useHistory } from "react-router-dom";
+import './ReviewForm.css'
 
 
 const ReviewForm = () => {
@@ -39,31 +40,33 @@ const ReviewForm = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Leave a Review!</h2>
-      <ul className='errors'>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Stars
-        <input
-        type='number'
-        value={stars}
-        onChange={(e) => setStars(e.target.value)}/>
-      </label>
-      <label>
-        Review
-        <input
-        type='text'
-        value={review}
-        onChange={(e) => setReview(e.target.value)}/>
-      </label>
-      <button type='submit'>
-        Submit Review
-      </button>
-    </form>
+    <div className='review-form-container'>
+      <form onSubmit={handleSubmit}>
+        <h2>Leave a Review!</h2>
+        <ul className='errors'>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Stars
+          <input
+          type='number'
+          value={stars}
+          onChange={(e) => setStars(e.target.value)}/>
+        </label>
+        <label>
+          Review
+          <input
+          type='text'
+          value={review}
+          onChange={(e) => setReview(e.target.value)}/>
+        </label>
+        <button type='submit'>
+          Submit Review
+        </button>
+      </form>
+    </div>
   );
 }
 

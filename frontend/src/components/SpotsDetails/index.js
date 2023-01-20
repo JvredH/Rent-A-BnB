@@ -46,14 +46,14 @@ const SpotDetails = () => {
   if(!user || user.id === prevState.ownerId) {
     reviewButton = (<div>{null}</div>)
   } else {
-    reviewButton = <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link>
+    reviewButton = <Link to={`/spots/${spotId}/reviews/new`}><button className='review-button'>Leave a Review</button></Link>
   }
 
 
   return(
     <>
       {isLoaded && (
-        <div>
+        <div className='main-container'>
           <div>
             <h1>{spot.name}</h1>
           </div>
@@ -67,8 +67,8 @@ const SpotDetails = () => {
               <DeleteSpot spot={spot}/>
             </div> */}
           </div>
-          <div>
-            <img alt='' src={`${spot.SpotImages[0].url}`}/>
+          <div className='image-container'>
+            <img alt='' className='image' src={`${spot.SpotImages[0].url}`}/>
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>
@@ -76,17 +76,18 @@ const SpotDetails = () => {
               <p className='description'>{spot.description}</p>
             </div>
             <div className='right-desc'>
-              <div>
-                <div>{`${spot.price} night`}</div>
+              <div className='right-desc-price'>
+                <div>{`$${spot.price} night`}</div>
                 <div>{`${star} - ${spot.avgStarRating} - ${spot.numReviews} reviews `}</div>
               </div>
-              {reviewButton}
+              <div className='review-button-container'>{reviewButton}</div>
+
               {/* <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link> */}
             </div>
           </div>
           <div className='box-under-host-desc'>
             <h3>{`${star} ${spot.avgStarRating} - ${spot.numReviews} Reviews`}</h3>
-            <div className='whole-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
+            <div className='main-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
           </div>
         </div>
       )}
