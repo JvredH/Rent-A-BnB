@@ -1,14 +1,20 @@
+.nav-container {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 30px;
+}
+
+
 .top-nav {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  /* padding-left: 100px;
-  padding-right: 100px; */
-  border: 1px solid red;
-  border-bottom: grey solid 1px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 86%;
+  /* border-bottom: grey solid 1px; */
   height: 80px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   width: 100%;
 }
 
@@ -19,12 +25,31 @@
 
 .right-nav-container {
   display: flex;
+  align-items: center;
+}
+
+.create-button {
+  text-decoration: none;
 }
 
 .create-spot-button {
-  margin-right: 15px;
+  margin-right: 30px;
 }
 
 textarea {
   resize: none;
+}
+
+.profile-button {
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  font-size: 15px;
+}
+
+.hamburger-menu {
+  margin-right: 6px;
 }

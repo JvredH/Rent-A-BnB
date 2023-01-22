@@ -16,7 +16,7 @@ const DeleteSpot = ({spot}) => {
   }
 
   return (
-    <button onClick={handleDelete}>Delete</button>
+    <button onClick={handleDelete} className='crud-button'>Delete</button>
   );
 }
 

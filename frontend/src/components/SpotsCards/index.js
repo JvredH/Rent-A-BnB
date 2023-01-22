@@ -13,9 +13,9 @@ const SpotCards = ({spot}) => {
         <div>
           <div className='location-and-rating'>
             <div>{`${spot.city}, ${spot.state}`}</div>
-            <div>{`${star} ${spot.avgRating}`}</div>
+            <div className='rating'>{`${star} ${spot.avgRating}`}</div>
           </div>
-          <div>{`$${spot.price} night`}</div>
+          <div className='price'>{`$${spot.price}`}<span className='night'> night</span></div>
         </div>
       </Link>
     </div>

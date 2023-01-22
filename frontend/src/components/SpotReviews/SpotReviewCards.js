@@ -10,6 +10,7 @@ const SpotReviewCards = ({spot, user}) => {
   const reviewsArray = Object.values(allReviews)
   // console.log('from spotReviewCards.js ', reviewsArray);
   const star = String.fromCharCode(0x2605)
+  const bullet = String.fromCharCode(0x2022)
   // console.log(`user from review card`, user)
 
   useEffect(() => {
@@ -44,21 +45,21 @@ const SpotReviewCards = ({spot, user}) => {
     if (user === null) {
       xButton = (
         <div className='name-delete'>
-          <div>{review.User.firstName}</div>
+          <div className='first-name'>{review.User.firstName}</div>
           <div>{null}</div>
         </div>
       )
       } else if ( review.userId === user.id) {
         xButton = (
           <div className='name-delete'>
-            <div>{review.User.firstName}</div>
+            <div className='first-name'>{review.User.firstName}</div>
             <div><DeleteReview review={review}/></div>
         </div>
       )
       } else {
         xButton = (
           <div className='name-delete'>
-            <div>{review.User.firstName}</div>
+            <div className='first-name'>{review.User.firstName}</div>
             <div>{null}</div>
           </div>
         )
@@ -68,8 +69,11 @@ const SpotReviewCards = ({spot, user}) => {
     return (
       <div className='review-card' key={review.id}>
         {xButton}
-        <div>{`${star} ${review.stars}`}</div>
-        <div>{formattedDate}</div>
+        <div className='rating-date'>
+          {`${star} ${review.stars}`}
+
+        </div>
+        <div className='date'>{` ${formattedDate}`}</div>
         <div>{review.review}</div>
       </div>
     )

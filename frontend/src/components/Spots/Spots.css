@@ -24,6 +24,18 @@
   margin: 10px 0px 10px 0px;
 }
 
+.rating {
+  font-weight: normal;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.night {
+  font-weight: normal;
+}
+
 .cards {
   text-decoration: none;
   color: black;
