@@ -13,7 +13,7 @@
 
 .x-button {
   background-color: white;
-  border: solid 1px black;
+  border: solid 2px red;
   color: red;
   border-radius: 4px;
   cursor: pointer;

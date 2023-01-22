@@ -24,7 +24,7 @@ function Navigation({ isLoaded }){
         <div className='create-spot-button'>
           <Link to='/spots/new'>rent-a-bnb your home</Link>
         </div>
-        <div className='profile-button'>
+        <div>
           <ProfileButton user={sessionUser} />
         </div>
       </div>
