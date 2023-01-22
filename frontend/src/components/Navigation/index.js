@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import logo from './../../images/rent-a-bnb-logo.png'
+import logo from './../../images/rent-a-bnb-logo2.png'
 // import OpenModalButton from '../OpenModalButton/index'
 // import CreateSpot from '../SpotsForms/CreateSpot';
 

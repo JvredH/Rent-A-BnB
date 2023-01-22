@@ -1,14 +1,15 @@
 .review-card {
   border: lightgrey 1px solid;
   padding: 10px;
-  border-radius: 10px
+  border-radius: 10px;
+  max-width: 539px;
+  overflow-wrap: break-word;
 }
 
 .name-delete {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 }
 
 .x-button {
@@ -33,3 +34,9 @@
   display: flex;
   align-items: center;
 }
+
+/* .review {
+  max-width: 539px;
+  display: flex;
+  flex: wrap;
+} */

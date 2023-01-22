@@ -10,7 +10,7 @@ const SpotReviewCards = ({spot, user}) => {
   const reviewsArray = Object.values(allReviews)
   // console.log('from spotReviewCards.js ', reviewsArray);
   const star = String.fromCharCode(0x2605)
-  const bullet = String.fromCharCode(0x2022)
+  // const bullet = String.fromCharCode(0x2022)
   // console.log(`user from review card`, user)
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const SpotReviewCards = ({spot, user}) => {
 
         </div>
         <div className='date'>{` ${formattedDate}`}</div>
-        <div>{review.review}</div>
+        <div className='review'>{review.review}</div>
       </div>
     )
   })
