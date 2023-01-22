@@ -26,13 +26,13 @@
 .profile-dropdown {
   display: flex;
   flex-direction: column;
-  width: 100px;
+  width: 150px;
   border: grey 1px solid;
   border-radius: 5px;
   list-style: none;
   position: absolute;
-  right: 90px;
-  top: 70px;
+  right: 130px;
+  top: 50px;
   padding-left: 10px;
   padding-bottom: 10px;
   padding-right: 10px;

@@ -7,6 +7,24 @@
   min-width: 40%;
 }
 
+.spot-description {
+  display: flex;
+  flex-direction: row;
+}
+
+.numreviews {
+  text-decoration: underline;
+}
+
+.bullet {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.location {
+  text-decoration: underline;
+}
+
 .crud-button {
   border: none;
   margin-right: 5px;
@@ -35,6 +53,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 }
 
 

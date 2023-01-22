@@ -79,7 +79,14 @@ const SpotDetails = () => {
             <h1>{spot.name}</h1>
           </div>
           <div className='spot-location-container'>
-            <p>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews ${bullet} ${spot.city}, ${spot.state}, ${spot.country}`}</p>
+            {/* <p>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews ${bullet} ${spot.city}, ${spot.state}, ${spot.country}`}</p> */}
+            <div className='spot-description'>
+              <div>{`${star} ${spot.avgStarRating}`}</div>
+              <div className='bullet'>{bullet}</div>
+              <div className='numreviews'>{`${spot.numReviews} reviews`}</div>
+              <div className='bullet'>{bullet}</div>
+              <div className='location'>{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
+            </div>
             {session}
             {/* <div>
               <Link to={`/spots/${spot.id}/edit`}>
