@@ -35,7 +35,7 @@ function Navigation({ isLoaded }){
     <div className='nav-container'>
       <div className='top-nav'>
         <div>
-          <NavLink exact to="/"><img src={logo}/></NavLink>
+          <NavLink exact to="/"><img alt='' src={logo}/></NavLink>
           {/* <img src='./rent-a-bnb-logo.png' alt=''/> */}
         </div>
         {isLoaded && (
