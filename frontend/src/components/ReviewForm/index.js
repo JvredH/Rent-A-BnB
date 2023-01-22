@@ -43,7 +43,7 @@ const ReviewForm = () => {
 
   return (
     <div className='review-form-container'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='review-form'>
         <h2>Leave a Review!</h2>
         <ul className='errors'>
           {errors.map((error, idx) => (

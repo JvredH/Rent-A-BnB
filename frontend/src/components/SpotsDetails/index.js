@@ -18,6 +18,7 @@ const SpotDetails = () => {
   // console.log('user ====> ', user)
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
+  const bullet = String.fromCharCode(0x2022)
   const reviews = useSelector (state => state.reviews)
 
   const reviewsArray = Object.values(reviews)
@@ -37,13 +38,14 @@ const SpotDetails = () => {
     dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
   }, [dispatch, spotId, reviews])
 
+
   let session;
 
   if (user && user.id === prevState.ownerId) {
     session = (
       <div>
         <Link to={`/spots/${spot.id}/edit`}>
-          <button>Edit</button>
+          <button className='crud-button'>Edit</button>
         </Link>
         <DeleteSpot spot={spot}/>
       </div>
@@ -77,7 +79,7 @@ const SpotDetails = () => {
             <h1>{spot.name}</h1>
           </div>
           <div className='spot-location-container'>
-            <p>{`${star} ${spot.avgStarRating} - ${spot.numReviews} reviews - ${spot.city}, ${spot.state}, ${spot.country}`}</p>
+            <p>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews ${bullet} ${spot.city}, ${spot.state}, ${spot.country}`}</p>
             {session}
             {/* <div>
               <Link to={`/spots/${spot.id}/edit`}>
@@ -91,13 +93,13 @@ const SpotDetails = () => {
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>
-              <h3>Entire Spot Hosted By {spot.Owner.firstName}</h3>
+              <h2 className='host'>Entire Spot Hosted By {spot.Owner.firstName}</h2>
               <p className='description'>{spot.description}</p>
             </div>
             <div className='right-desc'>
               <div className='right-desc-price'>
-                <div>{`$${spot.price} night`}</div>
-                <div>{`${star} - ${spot.avgStarRating} - ${spot.numReviews} reviews `}</div>
+                <div className='price'>{`$${spot.price} night`}</div>
+                <div>{`${star} ${bullet} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews `}</div>
               </div>
               <div className='review-button-container'>{reviewButton}</div>
 
@@ -105,8 +107,8 @@ const SpotDetails = () => {
             </div>
           </div>
           <div className='box-under-host-desc'>
-            <h3>{`${star} ${spot.avgStarRating} - ${spot.numReviews} Reviews`}</h3>
-            <div className='main-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
+            <h3>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} Reviews`}</h3>
+            <div className='main-review-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
           </div>
         </div>
       )}

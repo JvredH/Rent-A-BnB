@@ -1,4 +1,35 @@
 .review-card {
-  border: black 1px solid;
+  border: lightgrey 1px solid;
   padding: 10px;
+  border-radius: 10px
+}
+
+.name-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.x-button {
+  background-color: white;
+  border: solid 2px red;
+  color: red;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.first-name {
+  font-weight: bold;
+}
+
+.date {
+  color: grey;
+  font-size: 14px;
+}
+
+.rating-date {
+  display: flex;
+  align-items: center;
 }

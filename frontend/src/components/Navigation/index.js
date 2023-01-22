@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import logo from './../../images/rent-a-bnb-logo.png'
 // import OpenModalButton from '../OpenModalButton/index'
 // import CreateSpot from '../SpotsForms/CreateSpot';
 
@@ -21,9 +22,9 @@ function Navigation({ isLoaded }){
     session = (
       <div className='right-nav-container'>
         <div className='create-spot-button'>
-          <Link to='/spots/new'>Create Spot</Link>
+          <Link to='/spots/new'>rent-a-bnb your home</Link>
         </div>
-        <div className='profile-button'>
+        <div>
           <ProfileButton user={sessionUser} />
         </div>
       </div>
@@ -31,21 +32,24 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <div className='top-nav'>
-      <div>
-        <NavLink exact to="/">Home</NavLink>
+    <div className='nav-container'>
+      <div className='top-nav'>
+        <div>
+          <NavLink exact to="/"><img src={logo}/></NavLink>
+          {/* <img src='./rent-a-bnb-logo.png' alt=''/> */}
+        </div>
+        {isLoaded && (
+          session
+          // <div>
+          //   <div>
+          //     <Link to='/spots/new'>Create Spot</Link> {/* delete this link, list and parent div, for testing purposes */}
+          //   </div>
+          //   <div>
+          //     <ProfileButton user={sessionUser} />
+          //   </div>
+          // </div>
+        )}
       </div>
-      {isLoaded && (
-        session
-        // <div>
-        //   <div>
-        //     <Link to='/spots/new'>Create Spot</Link> {/* delete this link, list and parent div, for testing purposes */}
-        //   </div>
-        //   <div>
-        //     <ProfileButton user={sessionUser} />
-        //   </div>
-        // </div>
-      )}
     </div>
   );
 }
