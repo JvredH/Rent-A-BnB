@@ -21,8 +21,8 @@ function Navigation({ isLoaded }){
   } else {
     session = (
       <div className='right-nav-container'>
-        <div className='create-spot-button'>
-          <Link to='/spots/new'>rent-a-bnb your home</Link>
+        <div>
+          <Link to='/spots/new'><button className='create-spot-button'>rent-a-bnb your home</button></Link>
         </div>
         <div>
           <ProfileButton user={sessionUser} />

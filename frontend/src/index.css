@@ -1,4 +1,15 @@
 /* TODO Add site wide styles */
 body {
   font-family: Manrope, Arial, Helvetica, sans-serif;
+  margin-bottom: 80px;
+}
+
+
+input {
+  width: 530px;
+  padding: 10px
+}
+
+.errors {
+  text-align: left;
 }

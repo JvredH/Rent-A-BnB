@@ -1,26 +1,37 @@
-#modal-content {
-  border-radius: 15px;
-  height: 400px;
-  width: 600px;
+/* #modal-content { */
+  /* border-radius: 15px; */
+  /* border: solid red 1px; */
+  /* height: 400px;
+  width: 600px; */
+  /* padding: 20px;
+} */
+
+.top-input {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 1px solid black;
+  border-bottom: none;
+}
+
+.bottom-input {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px solid black;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
+  /* align-items: center; */
+  border-radius: 15px;
+  /* border: 2px green solid; */
 }
 
 .form-h1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
-input {
-  width: 530px;
-  padding: 10px
-}
 
 
 form > button {
@@ -29,4 +40,21 @@ form > button {
   width: 553px;
   cursor: pointer;
   padding:10px;
+}
+
+.LogIn-button {
+  margin-top: 10px;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(189, 30, 89);
+  border: none;
+  border-radius: 7px;
+}
+
+.demo-user-button {
+  color: black;
+  font-weight: 500;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 7px;
 }
