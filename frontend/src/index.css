@@ -4,10 +4,10 @@ body {
   margin-bottom: 80px;
 }
 
-
 input {
   width: 530px;
-  padding: 10px
+  padding: 10px;
+  border: black 1px solid;
 }
 
 .errors {
