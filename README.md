@@ -45,19 +45,19 @@ Reviews can be left and deleted at any spot detail page. All these functionaliti
 ![spot-reviews](./frontend/assets/spotreviews.png)
 
 ## To Do List for Future Features
-- add functionality to edit a review
-- add ability to add photos of reviews
-- full CRUD functionality to book sites
-- user profile page
+- [ ] add functionality to edit a review
+- [ ] add ability to add photos of reviews
+- [ ] full CRUD functionality to book sites
+- [ ] user profile page
 
 ## To Get Started Locally
 1. Clone the repo
-2. Install dependencies by running npm install in root directory of project.
+2. Install dependencies by running ```npm install``` in root directory of project.
 3. Open two terminals, cd into frontend folder in one terminal, in the other cd into backend
 4. In back end terminal migrate tables and seed data by running:
-  -- npx dotenv sequelize-cli db:migrate
-  -- npx dotenv sequelize-cli db:seed:all
-5. npm start in both terminals
+  	- ```npx dotenv sequelize-cli db:migrate```
+  	- ```npx dotenv sequelize-cli db:seed:all```
+5. ```npm start``` in both terminals
 6. Go to localhost:3000 in your browser and begin
 
 ## Contact Information
