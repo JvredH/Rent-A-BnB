@@ -54,6 +54,14 @@
   font-size: 15px;
 }
 
+.li-modals {
+  cursor: pointer;
+}
+
+.li-modals:hover {
+  background-color: lightgrey
+}
+
 .logout-button:hover {
   background-color: lightgrey;
 }
@@ -97,8 +105,4 @@ textarea {
 
 .hamburger-menu {
   margin-right: 6px;
-}
-
-.li-modals:hover {
-  background-color: lightgrey
 }
