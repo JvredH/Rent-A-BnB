@@ -75,6 +75,7 @@ const SpotsForm = ({spot, formType}) => {
             type='url'
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+            required
           />
         </label>
     )
