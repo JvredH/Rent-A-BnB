@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneSpotThunk } from "../../store/spotsReducer";
 import './SpotDetails.css'
 import DeleteSpot from "./DeleteSpot";
-// import EditSpot from "../SpotsForms/EditSpot";
 import { Link } from "react-router-dom";
 import SpotReviewCards from "../SpotReviews/SpotReviewCards";
 
@@ -14,25 +13,14 @@ const SpotDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
   const user = useSelector(state => state.session.user)
-  // console.log('spot ====> ', spot)
-  // console.log('user ====> ', user)
+
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
   const bullet = String.fromCharCode(0x2022)
   const reviews = useSelector (state => state.reviews)
 
   const reviewsArray = Object.values(reviews)
-  // console.log('prevState ====' , prevState);
 
-  // console.log('prevState', prevState)
-  // console.log('user =====', user)
-  // console.log('reviews =====' ,reviews)
-
-  // let firstName = user.firstName
-
-  // let reviewer;
-
-  // reviewsArray.forEach(review => User.firstName === user.firstName ? reviewer = true : reviewer = false)
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
@@ -79,7 +67,6 @@ const SpotDetails = () => {
             <h1>{spot.name}</h1>
           </div>
           <div className='spot-location-container'>
-            {/* <p>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews ${bullet} ${spot.city}, ${spot.state}, ${spot.country}`}</p> */}
             <div className='spot-description'>
               <div>{`${star} ${spot.avgStarRating}`}</div>
               <div className='bullet'>{bullet}</div>
@@ -88,12 +75,6 @@ const SpotDetails = () => {
               <div className='location'>{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
             </div>
             {session}
-            {/* <div>
-              <Link to={`/spots/${spot.id}/edit`}>
-                <button>Edit</button>
-              </Link>
-              <DeleteSpot spot={spot}/>
-            </div> */}
           </div>
           <div className='image-container'>
             <img alt='' className='image' src={`${spot.SpotImages[0].url}`}/>
@@ -110,7 +91,6 @@ const SpotDetails = () => {
               </div>
               <div className='review-button-container'>{reviewButton}</div>
 
-              {/* <Link to={`/spots/${spotId}/reviews/new`}><button>Leave a Review</button></Link> */}
             </div>
           </div>
           <div className='box-under-host-desc'>
