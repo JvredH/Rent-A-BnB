@@ -24,18 +24,44 @@ const CreateBooking = ({spotId, spot, sessionUser}) => {
       endDate
     }
 
-    dispatch(createBookingThunk(newBooking, spotId))
 
-    // push to users bookings, have the newer bookings show up a the top of the list.
+    return await dispatch(createBookingThunk(newBooking, spotId))
+    .then(() => history.push(`/users/${sessionUser.id}/trips`))
+    .catch(
+      async (res) => {
+        const data = await res.json();
+        console.log('errors', errors)
+        if (data && data.errors) setErrors(Object.values(data.errors))
+        if (data && data.messages) setErrors(Object.values(data.messages))
+      }
+    )
+  }
+
+  let buttonContent;
+  let disabled;
+  if (sessionUser && sessionUser.id === spot.Owner.id) {
+    buttonContent = 'Spot Owner Cannot Reserve Their Spot'
+    disabled = true
+  } else if (!sessionUser) {
+    buttonContent = 'Log In To Reserve'
+    disabled = true
+  } else {
+    buttonContent ='Reserve'
+    disabled = false
   }
 
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <ul className='errors'>
+          {errors && errors.length > 0 && errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <input type='date' value={startDate} onChange={e => setStartDate(e.target.value)}/>
         <input type='date' value={endDate} onChange={e => setEndDate(e.target.value)}/>
-        <button type='submit'>Reserve</button>
+        <button type='submit' disabled={disabled}>{buttonContent}</button>
       </form>
     </div>
   )

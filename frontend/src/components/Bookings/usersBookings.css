@@ -29,6 +29,14 @@
   padding: 20px;
 }
 
+.booking-spot-name {
+  font-weight: bold;
+}
+
+.booking-addy {
+  font-size: 15px;
+}
+
 .booking-card-left-bottom {
   display: grid;
   grid-template-columns: 1fr 1fr;

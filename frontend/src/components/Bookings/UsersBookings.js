@@ -8,9 +8,7 @@ const UsersBookings = () => {
   // const {userId} = useParams();
   const dispatch = useDispatch();
   const bookings = useSelector(state => state.bookings.usersBookings)
-  const bookingsArr = Object.values(bookings)
-
-  
+  const bookingsArr = Object.values(bookings).reverse()
 
   useEffect(() => {
     dispatch(getUsersBookingsThunk())
@@ -24,7 +22,7 @@ const UsersBookings = () => {
     bookingsCards = ( bookingsArr.map(booking => {
       let start = new Date(booking.startDate)
       let end = new Date(booking.endDate)
-      let options = {year: 'numeric', month: 'long', day: 'numeric'}
+      let options = {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'}
       let formattedStart = start.toLocaleDateString('en-US', options)
       let formattedEnd = end.toLocaleDateString('en-US', options)
 
@@ -32,10 +30,10 @@ const UsersBookings = () => {
       <div className='bookings-card'>
         <div className='booking-card-left'>
           <div className='booking-card-left-top'>
-            <div>{booking.Spot.name}</div>
-            <div>{`${booking.Spot.address}`}</div>
-            <div>{`${booking.Spot.city}, ${booking.Spot.state}`}</div>
-            <div>{`${booking.Spot.country}`}</div>
+            <div className='booking-spot-name'>{booking.Spot.name}</div>
+            <div className='booking-addy'>{`${booking.Spot.address}`}</div>
+            <div className='booking-addy'>{`${booking.Spot.city}, ${booking.Spot.state}`}</div>
+            <div className='booking-addy'>{`${booking.Spot.country}`}</div>
           </div>
           <div className='booking-card-left-bottom'>
             <div>
