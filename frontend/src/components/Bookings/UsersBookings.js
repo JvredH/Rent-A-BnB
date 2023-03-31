@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsersBookingsThunk } from "../../store/bookingsReducer";
 import OpenModalButton from '../OpenModalButton'
 import EditBooking from "./EditBooking";
+import DeleteBooking from "./DeleteBooking";
 import './usersBookings.css'
 
 const UsersBookings = () => {
@@ -45,11 +46,20 @@ const UsersBookings = () => {
               <div>{formattedEnd}</div>
             </div>
             <div>
-              <OpenModalButton
-                className="edit-booking-btn"
-                buttonText='Edit'
-                modalComponent={<EditBooking booking={booking} />}
-              />
+              {new Date() < new Date(booking.endDate) ?
+                <OpenModalButton
+                  className="edit-booking-btn"
+                  buttonText='Edit'
+                  modalComponent={<EditBooking booking={booking} />}
+                /> : null
+              }
+
+              {new Date() < new Date(booking.startDate) ?
+                <OpenModalButton
+                  className="delete-booking-btn"
+                  buttonText='Cancel'
+                  modalComponent={<DeleteBooking booking={booking} />}
+                /> : null}
             </div>
           </div>
         </div>

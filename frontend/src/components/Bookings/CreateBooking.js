@@ -24,7 +24,6 @@ const CreateBooking = ({spotId, spot, sessionUser}) => {
       endDate
     }
 
-
     return await dispatch(createBookingThunk(newBooking, spotId))
     .then(() => history.push(`/users/${sessionUser.id}/trips`))
     .catch(

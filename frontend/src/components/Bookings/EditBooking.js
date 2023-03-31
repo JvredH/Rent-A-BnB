@@ -35,6 +35,14 @@ const EditBooking = ({booking}) => {
 
   }
 
+  const startDateInput =
+  new Date(booking.startDate) >= new Date() ? (
+    <div>
+      <div>Start Date</div>
+      <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+    </div>
+  ) : <div>Trip has already started</div>;
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -43,7 +51,8 @@ const EditBooking = ({booking}) => {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <input type='date' value={startDate} onChange={e => setStartDate(e.target.value)}/>
+        {startDateInput}
+        <div>End Date</div>
         <input type='date' value={endDate} onChange={e => setEndDate(e.target.value)}/>
         <button type='submit'>Edit Booking</button>
       </form>
