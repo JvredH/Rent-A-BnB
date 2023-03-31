@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 import { getUsersBookingsThunk } from "../../store/bookingsReducer";
+import OpenModalButton from '../OpenModalButton'
+import EditBooking from "./EditBooking";
 import './usersBookings.css'
 
 const UsersBookings = () => {
@@ -42,7 +44,13 @@ const UsersBookings = () => {
               <div className='underline end-date'>End Date</div>
               <div>{formattedEnd}</div>
             </div>
-            <div>Edit/delete crud btns here</div>
+            <div>
+              <OpenModalButton
+                className="edit-booking-btn"
+                buttonText='Edit'
+                modalComponent={<EditBooking booking={booking} />}
+              />
+            </div>
           </div>
         </div>
         <div className='booking-card-right'>

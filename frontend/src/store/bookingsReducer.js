@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const CREATE_BOOKING = 'session/CREATE_BOOKING'
 const GET_USER_BOOKINGS = 'session/GET_USER_BOOKINGS'
+const EDIT_BOOKING = 'session/EDIT_BOOKING'
 
 const createBookingAction = (createdBooking) => {
   return({
@@ -14,6 +15,13 @@ const getUserBookingsAction = (userBookings) => {
   return ({
     type: GET_USER_BOOKINGS,
     userBookings
+  })
+}
+
+const editBookingAction = (updatedDates) => {
+  return ({
+    type: EDIT_BOOKING,
+    updatedDates
   })
 }
 
@@ -43,6 +51,20 @@ export const getUsersBookingsThunk = () => async dispatch => {
   }
 }
 
+export const editBookingThunk = (newDates, bookingId) => async dispatch => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(newDates)
+  })
+
+  if (response.ok) {
+    const updatedDates = await response.json();
+    dispatch(editBookingAction(updatedDates));
+    return updatedDates;
+  }
+}
+
 const normalize = (array) => {
   const obj = {};
   array.forEach(el => {obj[el.id] = el})
@@ -56,6 +78,12 @@ const bookingsReducer = (state = initialState, action) => {
     case GET_USER_BOOKINGS: {
       const newState = {...state};
       newState.usersBookings = normalize(action.userBookings.Bookings)
+      return newState
+    }
+    case EDIT_BOOKING: {
+      const newState = {...state};
+      newState.usersBookings[action.updatedDates.id].startDate = action.updatedDates.startDate
+      newState.usersBookings[action.updatedDates.id].endDate = action.updatedDates.endDate
       return newState
     }
     default:
