@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useParams, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './spotsCards.css'
 import DeleteSpot from "../SpotsDetails/DeleteSpot";
 

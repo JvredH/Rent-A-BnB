@@ -2,7 +2,7 @@ import { useModal } from "../../context/Modal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editBookingThunk, getUsersBookingsThunk } from "../../store/bookingsReducer";
-
+import './editBookings.css'
 import { useParams } from "react-router-dom";
 
 const EditBooking = ({booking}) => {

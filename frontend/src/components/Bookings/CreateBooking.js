@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createBookingThunk } from "../../store/bookingsReducer";
+import './createBooking.css'
 
 const CreateBooking = ({spotId, spot, sessionUser}) => {
   const history = useHistory();
@@ -58,9 +59,11 @@ const CreateBooking = ({spotId, spot, sessionUser}) => {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <input type='date' value={startDate} onChange={e => setStartDate(e.target.value)}/>
-        <input type='date' value={endDate} onChange={e => setEndDate(e.target.value)}/>
-        <button type='submit' disabled={disabled}>{buttonContent}</button>
+        <div className='date-input-container'>
+          <input id='create-date-input-start' type='date' value={startDate} onChange={e => setStartDate(e.target.value)}/>
+          <input id='create-date-input-end' type='date' value={endDate} onChange={e => setEndDate(e.target.value)}/>
+        </div>
+        <button className='create-button' type='submit' disabled={disabled}>{buttonContent}</button>
       </form>
     </div>
   )
