@@ -38,6 +38,10 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
+  const handleClick = () => {
+    closeMenu()
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -56,8 +60,8 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
-            <li><NavLink to={`/users/${user.id}/spots`}>My Spots</NavLink></li>
-            <li><NavLink to={`/users/${user.id}/trips`}>My Trips</NavLink></li>
+            <li><NavLink onClick={handleClick} to={`/users/${user.id}/spots`}>My Spots</NavLink></li>
+            <li><NavLink onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li>
             <li>
               <div className="logout-button" onClick={logout}>Log Out</div>
             </li>

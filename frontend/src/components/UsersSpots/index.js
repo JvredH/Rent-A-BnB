@@ -7,21 +7,21 @@ import SpotCards from "../SpotsCards";
 
 const UsersSpots = () => {
   const dispatch = useDispatch();
-  const {userId} = useParams();
+  let {userId} = useParams();
   const userSpots = useSelector(state => state.usersData.usersSpots);
   const spotsArr = Object.values(userSpots)
-
-
 
   useEffect(() => {
     dispatch(getUsersSpotsThunk(userId))
   }, [dispatch])
 
 
-
   return (
-    <div className='Spots-main-div'>
-      {spotsArr.map(spot => <SpotCards spot={spot} /> )}
+    <div>
+      <h1>Your Spots!</h1>
+      <div className='Spots-main-div'>
+        {spotsArr.map(spot => <SpotCards spot={spot} userId={userId}/> )}
+      </div>
     </div>
   )
 }

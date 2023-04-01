@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
+import { useParams, NavLink } from 'react-router-dom';
+import './spotsCards.css'
+import DeleteSpot from "../SpotsDetails/DeleteSpot";
 
-const SpotCards = ({spot}) => {
-  // console.log('from spots card :', spot)
+const SpotCards = ({spot,userId}) => {
   const star = String.fromCharCode(0x2605)
+
+  const crudBtns = (
+    <div>
+      <NavLink to={`/spots/${spot.id}/edit`}>Edit</NavLink>
+      <DeleteSpot spot={spot}/> // type out crud here urself.
+    </div>
+  )
+
+  console.log(userId)
 
   return (
     <div className='spot-card-container'>
@@ -15,7 +26,10 @@ const SpotCards = ({spot}) => {
             <div>{`${spot.city}, ${spot.state}`}</div>
             <div className='rating'>{`${star} ${spot.avgRating}`}</div>
           </div>
-          <div className='price'>{`$${spot.price}`}<span className='night'> night</span></div>
+          <div className='spot-night-crud'>
+            <div className='price'>{`$${spot.price}`}<span className='night'> night</span></div>
+            {+userId === spot.ownerId && crudBtns}
+          </div>
         </div>
       </Link>
     </div>
