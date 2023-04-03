@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -37,6 +38,10 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
+  const handleClick = () => {
+    closeMenu()
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -55,6 +60,8 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
+            <li><NavLink className='profile-btn-navlinks' onClick={handleClick} to={`/users/${user.id}/spots`}>My Spots</NavLink></li>
+            <li><NavLink className='profile-btn-navlinks' onClick={handleClick} to={`/users/${user.id}/trips`}>My Trips</NavLink></li>
             <li>
               <div className="logout-button" onClick={logout}>Log Out</div>
             </li>

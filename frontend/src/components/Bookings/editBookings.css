@@ -1,0 +1,44 @@
+.edit-booking-modal {
+  height: 35vh;
+  width: 15vw;
+}
+
+.edit-booking-form-title {
+  font-weight: bold;
+}
+
+.edit-booking-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-booking-modal input {
+  width: 14vw;
+  margin-bottom: 7px;
+  border-radius: 7px;
+}
+
+.trip-started {
+  color: red;
+  margin-bottom: 5px;
+}
+
+.edit-booking-label {
+  margin-bottom: 7px;
+  text-decoration: underline;
+}
+
+.submit-booking-edit-btn {
+  width: 100px;
+  border-radius: 7px;
+  border: none;
+  color: white;
+  /* font-weight: bold; */
+  background-color: rgb(215, 4, 102);
+}
+
+#edit-cancel-btn {
+  background-color: lightgrey;
+  color: black
+}

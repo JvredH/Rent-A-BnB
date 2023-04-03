@@ -6,6 +6,7 @@ import './SpotDetails.css'
 import DeleteSpot from "./DeleteSpot";
 import { Link } from "react-router-dom";
 import SpotReviewCards from "../SpotReviews/SpotReviewCards";
+import CreateBooking from "../Bookings/CreateBooking";
 
 const SpotDetails = () => {
   let {spotId} = useParams()
@@ -13,7 +14,6 @@ const SpotDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const spot = useSelector(state => state.spots[spotId])
   const user = useSelector(state => state.session.user)
-
   const prevState = {...spot}
   const star = String.fromCharCode(0x2605)
   const bullet = String.fromCharCode(0x2022)
@@ -89,12 +89,16 @@ const SpotDetails = () => {
                 <div className='price'>{`$${spot.price} night`}</div>
                 <div>{`${star} ${bullet} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews `}</div>
               </div>
-              <div className='review-button-container'>{reviewButton}</div>
-
+              <div>
+                <CreateBooking spotId={spotId} spot={spot} sessionUser={user}/>
+              </div>
             </div>
           </div>
           <div className='box-under-host-desc'>
-            <h3>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} Reviews`}</h3>
+            <div className='rating-and-review-btn'>
+              <h3>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} Reviews`}</h3>
+              <div className='review-button-container'>{reviewButton}</div>
+            </div>
             <div className='main-review-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>
           </div>
         </div>

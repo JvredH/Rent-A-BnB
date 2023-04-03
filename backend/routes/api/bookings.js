@@ -119,7 +119,8 @@ router.put('/:bookingId', requireAuth, validateBookings, async ( req, res, next 
       [Op.or]: {
         startDate: {[Op.between]: [startDate, endDate]},
         endDate: {[Op.between]: [startDate, endDate]}
-      }
+      },
+      id: {[Op.not]: booking.id}
     }
   })
 

@@ -63,6 +63,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 
@@ -74,6 +75,12 @@
 .box-under-host-desc {
   border-top: lightgrey 1px solid;
   margin-top: 10px;
+}
+
+.rating-and-review-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .main-review-card-container {
@@ -105,8 +112,9 @@
 }
 
 .review-button {
-  width: 275px;
+  width: 150px;
   margin-bottom: 10px;
+  margin-top: 10px;
   align-self: center;
   cursor: pointer;
   padding-top: 15px;

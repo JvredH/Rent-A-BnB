@@ -1,0 +1,65 @@
+.users-bookings-main {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70vw;
+}
+
+.bookings-card {
+  border: 1px solid lightgrey;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 300px;
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.bookings-card:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.booking-card-left {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.booking-card-left-top {
+  border-bottom: 1px solid lightgrey;
+  padding: 20px;
+}
+
+.booking-spot-name {
+  font-weight: bold;
+}
+
+.booking-addy {
+  font-size: 15px;
+}
+
+.booking-card-left-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.end-date {
+  margin-top: 10px;
+}
+
+.booking-card-right {
+  border-left: 1px solid lightgrey;
+  overflow: hidden;
+}
+
+.booking-image {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
