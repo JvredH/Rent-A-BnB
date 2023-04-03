@@ -77,7 +77,7 @@ const SpotDetails = () => {
             {session}
           </div>
           <div className='image-container'>
-            <img alt='' className='image' src={`${spot.SpotImages[0].url}`}/>
+            <img alt='' className='image' src={`${spot.SpotImages[0].url}`} onError={(e) => { e.target.onerror = null; e.target.src = 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg' }}/>
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>

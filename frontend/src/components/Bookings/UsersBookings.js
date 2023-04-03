@@ -45,19 +45,18 @@ const UsersBookings = () => {
               <div className='underline end-date'>End Date</div>
               <div>{formattedEnd}</div>
             </div>
-            <div>
+            <div className='edit-delete-container'>
               {new Date() < new Date(booking.endDate) ?
                 <OpenModalButton
                   className="edit-booking-btn"
-                  buttonText='Edit'
+                  buttonText={<i className="fa-regular fa-pen-to-square">{` edit`}</i>}
                   modalComponent={<EditBooking booking={booking} />}
                 /> : null
               }
-
               {new Date() < new Date(booking.startDate) ?
                 <OpenModalButton
                   className="delete-booking-btn"
-                  buttonText='Cancel'
+                  buttonText={<i class="fa-solid fa-trash icon">{` cancel`}</i>}
                   modalComponent={<DeleteBooking booking={booking} />}
                 /> : null}
             </div>
