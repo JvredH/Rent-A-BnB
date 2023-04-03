@@ -24,4 +24,9 @@
   background-color: rgb(215, 4, 102);
   color: white;
   font-weight: bold;
+  margin: 10px 0px;
+}
+
+.grayed {
+  background-color: lightgrey;
 }

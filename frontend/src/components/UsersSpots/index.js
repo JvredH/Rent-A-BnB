@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersSpotsThunk } from "../../store/usersDataReducer";
 import SpotCards from "../SpotsCards";
+import './usersSpots.css'
 
 
 const UsersSpots = () => {
@@ -13,12 +14,12 @@ const UsersSpots = () => {
 
   useEffect(() => {
     dispatch(getUsersSpotsThunk(userId))
-  }, [dispatch])
+  }, [dispatch, userId])
 
 
   return (
     <div>
-      <h1>Your Spots!</h1>
+      <h1 className='users-spots-h1'>Your Spots!</h1>
       <div className='Spots-main-div'>
         {spotsArr.map(spot => <SpotCards spot={spot} userId={userId}/> )}
       </div>

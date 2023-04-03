@@ -63,7 +63,7 @@ const CreateBooking = ({spotId, spot, sessionUser}) => {
           <input id='create-date-input-start' type='date' value={startDate} onChange={e => setStartDate(e.target.value)}/>
           <input id='create-date-input-end' type='date' value={endDate} onChange={e => setEndDate(e.target.value)}/>
         </div>
-        <button className='create-button' type='submit' disabled={disabled}>{buttonContent}</button>
+        <button className={disabled ? 'create-button grayed' : 'create-button'} type='submit' disabled={disabled}>{buttonContent}</button>
       </form>
     </div>
   )

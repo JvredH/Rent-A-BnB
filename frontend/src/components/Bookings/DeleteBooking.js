@@ -3,6 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { getUsersBookingsThunk, deleteBookingThunk } from "../../store/bookingsReducer";
 import { useParams } from "react-router-dom";
+import './deleteBooking.css'
 
 const DeleteBooking = ({booking}) => {
   const {userId} = useParams
@@ -32,11 +33,13 @@ const DeleteBooking = ({booking}) => {
   }
 
   return (
-    <div>
+    <div className='booking-cancel-modal'>
       {errors.length > 0 && ( <div className='errors'>{errors}</div> )}
       <div>Are you sure you want to cancel this trip?</div>
-      <button onClick={handleYes}>Yes</button>
-      <button onClick={handleNo}>No</button>
+      <div className='cancel-booking-btn-container'>
+        <button onClick={handleYes} className='yes-btn' >Yes</button>
+        <button onClick={handleNo} className='no-btn'>No</button>
+      </div>
     </div>
   )
 }

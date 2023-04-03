@@ -35,26 +35,32 @@ const EditBooking = ({booking}) => {
 
   }
 
+  const handleCancel = () => {
+    closeModal()
+  }
+
   const startDateInput =
   new Date(booking.startDate) >= new Date() ? (
     <div>
-      <div>Start Date</div>
       <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
     </div>
-  ) : <div>Trip has already started</div>;
+  ) : <div className='trip-started'>Trip has already started</div>;
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='edit-booking-modal'>
+      <form className='edit-booking-form' onSubmit={handleSubmit}>
+        <div className='edit-booking-form-title'>Edit Your Trip.</div>
         <ul className='errors'>
           {errors && errors.length > 0 && errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
+        <div className='edit-booking-label'>Start Date</div>
         {startDateInput}
-        <div>End Date</div>
+        <div className='edit-booking-label'>End Date</div>
         <input type='date' value={endDate} onChange={e => setEndDate(e.target.value)}/>
-        <button type='submit'>Edit Booking</button>
+        <button className='submit-booking-edit-btn' type='submit'>Edit Booking</button>
+        <button className='submit-booking-edit-btn' id='edit-cancel-btn' onClick={handleCancel}>Cancel</button>
       </form>
     </div>
   )
