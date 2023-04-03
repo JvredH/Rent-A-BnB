@@ -43,6 +43,27 @@
   padding: 20px
 }
 
+.edit-delete-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.edit-booking-btn {
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.delete-booking-btn {
+  border: none;
+  background-color: white;
+  color: red;
+  cursor: pointer;
+}
+
 .underline {
   text-decoration: underline;
 }
