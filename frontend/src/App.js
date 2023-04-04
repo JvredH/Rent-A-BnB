@@ -11,6 +11,8 @@ import ReviewForm from "./components/ReviewForm";
 import UsersBookings from "./components/Bookings/UsersBookings";
 import UsersSpots from "./components/UsersSpots";
 import EditReviews from "./components/SpotReviews/EditReviews";
+import ErrorPage from "./components/Error";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,8 +50,12 @@ function App() {
           <Route path='/users/:userId/trips'>
             <UsersBookings />
           </Route>
+          <Route>
+            <ErrorPage />
+          </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }
