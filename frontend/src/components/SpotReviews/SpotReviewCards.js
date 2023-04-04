@@ -16,8 +16,8 @@ const SpotReviewCards = ({spot, user}) => {
   // console.log(`user from review card`, user)
 
   useEffect(() => {
-    dispatch(loadSpotReviewsThunk(spot.id))
-  } , [dispatch, spot.id])
+    dispatch(loadSpotReviewsThunk(spot?.id))
+  } , [dispatch, spot?.id])
 
   let xButton;
 

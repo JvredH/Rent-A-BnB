@@ -7,6 +7,7 @@ import DeleteSpot from "./DeleteSpot";
 import { Link } from "react-router-dom";
 import SpotReviewCards from "../SpotReviews/SpotReviewCards";
 import CreateBooking from "../Bookings/CreateBooking";
+import OpenModalButton from "../OpenModalButton";
 
 const SpotDetails = () => {
   let {spotId} = useParams()
@@ -36,7 +37,12 @@ const SpotDetails = () => {
         <Link to={`/spots/${spot.id}/edit`}>
           <button className='crud-button'>Edit</button>
         </Link>
-        <DeleteSpot spot={spot}/>
+        <OpenModalButton
+                  className="crud-button"
+                  buttonText='Delete'
+                  modalComponent={<DeleteSpot spot={spot}/>}
+        />
+        {/* <DeleteSpot spot={spot}/> */}
       </div>
     )
   } else {
@@ -65,30 +71,30 @@ const SpotDetails = () => {
       {isLoaded && (
         <div className='main-container'>
           <div>
-            <h1>{spot.name}</h1>
+            <h1>{spot?.name}</h1>
           </div>
           <div className='spot-location-container'>
             <div className='spot-description'>
-              <div>{`${star} ${spot.avgStarRating}`}</div>
+              <div>{`${star} ${spot?.avgStarRating}`}</div>
               <div className='bullet'>{bullet}</div>
-              <div className='numreviews'>{`${spot.numReviews} reviews`}</div>
+              <div className='numreviews'>{`${spot?.numReviews} reviews`}</div>
               <div className='bullet'>{bullet}</div>
-              <div className='location'>{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
+              <div className='location'>{`${spot?.city}, ${spot?.state}, ${spot?.country}`}</div>
             </div>
             {session}
           </div>
           <div className='image-container'>
-            <img alt='' className='image' src={`${spot.SpotImages[0].url}`} onError={(e) => { e.target.onerror = null; e.target.src = 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg' }}/>
+            <img alt='' className='image' src={`${spot?.SpotImages[0].url}`} onError={(e) => { e.target.onerror = null; e.target.src = 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg' }}/>
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>
-              <h2 className='host'>Entire Spot Hosted By {spot.Owner.firstName}</h2>
-              <p className='description'>{spot.description}</p>
+              <h2 className='host'>Entire Spot Hosted By {spot?.Owner.firstName}</h2>
+              <p className='description'>{spot?.description}</p>
             </div>
             <div className='right-desc'>
               <div className='right-desc-price'>
-                <div className='price'>{`$${spot.price} night`}</div>
-                <div>{`${star} ${bullet} ${spot.avgStarRating} ${bullet} ${spot.numReviews} reviews `}</div>
+                <div className='price'>{`$${spot?.price} night`}</div>
+                <div>{`${star} ${bullet} ${spot?.avgStarRating} ${bullet} ${spot?.numReviews} reviews `}</div>
               </div>
               <div>
                 <CreateBooking spotId={spotId} spot={spot} sessionUser={user}/>
@@ -97,7 +103,7 @@ const SpotDetails = () => {
           </div>
           <div className='box-under-host-desc'>
             <div className='rating-and-review-btn'>
-              <h3>{`${star} ${spot.avgStarRating} ${bullet} ${spot.numReviews} Reviews`}</h3>
+              <h3>{`${star} ${spot?.avgStarRating} ${bullet} ${spot?.numReviews} Reviews`}</h3>
               <div className='review-button-container'>{reviewButton}</div>
             </div>
             <div className='main-review-card-container'> <SpotReviewCards spot={spot} user={user}/> </div>

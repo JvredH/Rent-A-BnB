@@ -39,7 +39,7 @@ const CreateBooking = ({spotId, spot, sessionUser}) => {
 
   let buttonContent;
   let disabled;
-  if (sessionUser && sessionUser.id === spot.Owner.id) {
+  if (sessionUser && sessionUser.id === spot?.Owner.id) {
     buttonContent = 'Spot Owner Cannot Reserve Their Spot'
     disabled = true
   } else if (!sessionUser) {
