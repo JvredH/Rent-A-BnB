@@ -3,3 +3,10 @@
   flex-direction: row;
   justify-content: space-between
 }
+
+.city-state-container {
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
