@@ -21,6 +21,7 @@ const UsersSpots = () => {
     <div>
       <h1 className='users-spots-h1'>Your Spots!</h1>
       <div className='Spots-main-div'>
+        {spotsArr.length === 0 ? <h2>User has no spots yet</h2> : null}
         {spotsArr.map(spot => <SpotCards spot={spot} userId={userId}/> )}
       </div>
     </div>
