@@ -1,0 +1,20 @@
+.main-error-container {
+  display: flex;
+  height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.home-btn {
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.home-btn:hover {
+  background-color: lightgrey;
+}

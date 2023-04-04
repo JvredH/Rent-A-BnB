@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import SpotReviewCards from "../SpotReviews/SpotReviewCards";
 import CreateBooking from "../Bookings/CreateBooking";
 import OpenModalButton from "../OpenModalButton";
+import ErrorPage from "../Error";
 
 const SpotDetails = () => {
   let {spotId} = useParams()
@@ -63,6 +64,10 @@ const SpotDetails = () => {
         reviewButton = (<div>{null}</div>)
       }
     })
+  }
+
+  if (!spot) {
+    return <ErrorPage />
   }
 
 
