@@ -70,7 +70,7 @@ const SpotDetails = () => {
     <>
       {isLoaded && (
         <div className='main-container'>
-          <div>
+          <div className='name-container'>
             <h1>{spot?.name}</h1>
           </div>
           <div className='spot-location-container'>
