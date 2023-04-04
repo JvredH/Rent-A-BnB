@@ -23,7 +23,7 @@ const SpotCards = ({spot,userId}) => {
         </div>
         <div>
           <div className='location-and-rating'>
-            <div>{`${spot.city}, ${spot.state}`}</div>
+            <div className='city-state-container'>{`${spot.city}, ${spot.state}`}</div>
             <div className='rating'>{`${star} ${spot.avgRating}`}</div>
           </div>
           <div className='spot-night-crud'>
