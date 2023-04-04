@@ -23,7 +23,8 @@ const SpotDetails = () => {
 
 
   useEffect(() => {
-    dispatch(getOneSpotThunk(spotId)).then(() => setIsLoaded(true))
+    dispatch(getOneSpotThunk(spotId))
+      .then(() => setIsLoaded(true))
   }, [dispatch, spotId, reviews])
 
 
@@ -52,7 +53,7 @@ const SpotDetails = () => {
 
   if (user) {
     reviewsArray.forEach(review => {
-      if (review.User.id === user.id) {
+      if (review.User && review.User.id === user.id) {
         reviewButton = (<div>{null}</div>)
       }
     })
