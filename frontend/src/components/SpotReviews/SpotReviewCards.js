@@ -2,6 +2,8 @@ import { useDispatch, useSelector} from "react-redux";
 import { loadSpotReviewsThunk } from "../../store/reviewsReducer";
 import { useEffect } from "react";
 import DeleteReview from "./DeleteReview";
+import EditReviews from "./EditReviews";
+import { NavLink } from "react-router-dom";
 import './spotReviews.css'
 
 const SpotReviewCards = ({spot, user}) => {
@@ -14,8 +16,8 @@ const SpotReviewCards = ({spot, user}) => {
   // console.log(`user from review card`, user)
 
   useEffect(() => {
-    dispatch(loadSpotReviewsThunk(spot.id))
-  } , [dispatch, spot.id])
+    dispatch(loadSpotReviewsThunk(spot?.id))
+  } , [dispatch, spot?.id])
 
   let xButton;
 
@@ -45,15 +47,22 @@ const SpotReviewCards = ({spot, user}) => {
     if (user === null) {
       xButton = (
         <div className='name-delete'>
-          <div className='first-name'>{review.User.firstName}</div>
+          <div className='first-name'>{review.User?.firstName}</div>
           <div>{null}</div>
         </div>
       )
       } else if ( review.userId === user.id) {
         xButton = (
           <div className='name-delete'>
-            <div className='first-name'>{review.User.firstName}</div>
-            <div><DeleteReview review={review}/></div>
+            <div className='first-name'>{review.User?.firstName}</div>
+            <div className='edit-delete-rvw'>
+              <div>
+                <NavLink id='review-edit-btn' to={`/spots/${spot.id}/reviews/${review.id}/edit`}>
+                  <i className="fa-regular fa-pen-to-square"></i>
+                </NavLink>
+              </div>
+              <DeleteReview review={review}/>
+            </div>
         </div>
       )
       } else {

@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
 const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
 
 export const loadReviews = (spotReviews) => {
   return ({
@@ -23,6 +24,13 @@ export const deleteReview = (reviewId) => {
   return({
     type: DELETE_REVIEW,
     reviewId
+  })
+}
+
+export const editReviewAction = (editedReview) => {
+  return ({
+    type: EDIT_REVIEW,
+    editedReview
   })
 }
 
@@ -58,6 +66,21 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
   }
 }
 
+export const editReviewThunk = (newReviewData, reviewId) => async dispatch => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(newReviewData)
+  })
+
+  if (response.ok) {
+    const editedReview = await response.json();
+    dispatch(editReviewAction(editedReview));
+    return editedReview;
+  }
+
+}
+
 const initialState = {}
 
 const reviewsReducer = (state = initialState, action) => {
@@ -78,6 +101,11 @@ const reviewsReducer = (state = initialState, action) => {
       newState[action.review.id] = {...action.review, ...action.userInfo}
       // console.log(newState)
       return newState
+    }
+    case EDIT_REVIEW: {
+      const newState = {...state}
+      newState[action.editedReview.id] = action.editedReview;
+      return newState;
     }
     case DELETE_REVIEW : {
       const newState = {...state};

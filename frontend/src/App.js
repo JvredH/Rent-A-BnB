@@ -10,6 +10,7 @@ import EditSpot from "./components/SpotsForms/EditSpot";
 import ReviewForm from "./components/ReviewForm";
 import UsersBookings from "./components/Bookings/UsersBookings";
 import UsersSpots from "./components/UsersSpots";
+import EditReviews from "./components/SpotReviews/EditReviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
           <Route path='/' exact>
             <Spots />
           </Route>
-          <Route path='/spots/new'> {/* delete this later, for testing purposes*/}
+          <Route path='/spots/new'>
             <CreateSpot />
           </Route>
           <Route path='/spots/:spotId/reviews/new'>
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path='/spots/:spotId/edit'>
             <EditSpot />
+          </Route>
+          <Route path='/spots/:spotId/reviews/:reviewId/edit'>
+            <EditReviews />
           </Route>
           <Route path='/spots/:spotId'>
             <SpotDetails />

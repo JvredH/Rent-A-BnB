@@ -20,6 +20,13 @@
   word-break: break-all;
 }
 
+.name-container {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .numreviews {
   text-decoration: underline;
 }
