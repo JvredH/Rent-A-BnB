@@ -19,7 +19,7 @@ const SpotCards = ({spot,userId}) => {
     <div className='spot-card-container'>
       <Link className='cards' to={`/spots/${spot.id}`}>
         <div >
-          <img className='card-image' alt='' src={spot.previewImage} onError={(e) => { e.target.onerror = null; e.target.src = 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg' }} />
+          <img className='card-image' alt='' src={spot.previewImage} onError={(e) => { e.target.onerror = null; e.target.src = 'https://a0.muscache.com/im/pictures/7a6cd22c-6db5-4c25-abe4-4948e89b2c3d.jpg?im_w=1200' }} />
         </div>
         <div>
           <div className='location-and-rating'>
