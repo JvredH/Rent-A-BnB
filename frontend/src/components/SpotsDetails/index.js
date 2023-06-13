@@ -89,7 +89,7 @@ const SpotDetails = () => {
             {session}
           </div>
           <div className='image-container'>
-            <img alt='' className='image' src={`${spot?.SpotImages[0].url}`} onError={(e) => { e.target.onerror = null; e.target.src = 'https://cdn.luxe.digital/media/20230123162705/most-expensive-houses-in-the-world-reviews-luxe-digital.jpg' }}/>
+            <img alt='' className='image' src={`${spot?.SpotImages[0].url}`} onError={(e) => { e.target.onerror = null; e.target.src = 'https://a0.muscache.com/im/pictures/7a6cd22c-6db5-4c25-abe4-4948e89b2c3d.jpg?im_w=1200' }}/>
           </div>
           <div className='under-image-section'>
             <div className='host-desc'>
